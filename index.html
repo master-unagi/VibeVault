@@ -154,21 +154,24 @@
         </div>
 
         <!-- Arama Kutusu -->
-        <div class="w-full relative group mb-12">
-            <div class="absolute -inset-0.5 bg-gradient-to-r from-gold-600 to-wood-700 rounded-lg blur opacity-30 group-hover:opacity-60 transition duration-1000 group-hover:duration-200"></div>
-            <div class="relative flex items-center bg-wood-800/90 rounded-lg border border-wood-700 p-2 shadow-2xl backdrop-blur-sm">
-                <div class="pl-4 pr-2 text-gold-500">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
-                    </svg>
+        <div class="w-full relative group mb-12 flex flex-col items-center">
+            <div class="w-full relative">
+                <div class="absolute -inset-0.5 bg-gradient-to-r from-gold-600 to-wood-700 rounded-lg blur opacity-30 group-hover:opacity-60 transition duration-1000 group-hover:duration-200"></div>
+                <div class="relative flex items-center bg-wood-800/90 rounded-lg border border-wood-700 p-2 shadow-2xl backdrop-blur-sm">
+                    <div class="pl-4 pr-2 text-gold-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+                        </svg>
+                    </div>
+                    <input type="text" id="search-input" class="w-full bg-transparent text-paper-100 placeholder-paper-200/50 p-2 sm:p-3 outline-none text-base sm:text-lg font-sans" placeholder="Örn: The Matrix, Dune, İskandinav Mitolojisi, Star Wars...">
+                    <button id="search-btn" class="bg-gold-600 hover:bg-gold-500 text-wood-900 font-bold py-2 px-4 sm:py-3 sm:px-6 rounded-md transition-colors shadow-lg flex items-center gap-2">
+                        <span id="btn-text">Ara</span>
+                        <div id="btn-loader" class="loader hidden"></div>
+                    </button>
                 </div>
-                <input type="text" id="search-input" class="w-full bg-transparent text-paper-100 placeholder-paper-200/50 p-2 sm:p-3 outline-none text-base sm:text-lg font-sans" placeholder="Örn: The Matrix, Dune, İskandinav Mitolojisi, Star Wars...">
-                <button id="search-btn" class="bg-gold-600 hover:bg-gold-500 text-wood-900 font-bold py-2 px-4 sm:py-3 sm:px-6 rounded-md transition-colors shadow-lg flex items-center gap-2">
-                    <span id="btn-text">Ara</span>
-                    <div id="btn-loader" class="loader hidden"></div>
-                    <span id="loading-text" class="hidden text-sm ml-2 w-max text-wood-900 font-medium"></span>
-                </button>
             </div>
+            <!-- Yüklenme Aşamaları Yazısı (Mobilde taşmayı ve genişlemeyi önler) -->
+            <div id="loading-text" class="hidden text-sm mt-3 text-gold-500 font-medium tracking-wide animate-pulse text-center"></div>
         </div>
 
         <!-- Günün Alıntısı -->
@@ -602,6 +605,12 @@
                     const payload = {
                         contents: [{ parts: [{ text: `Şu içeriğe benzer vibe'a sahip eserler (kitap, film, dizi, oyun vb.) öner: ${query}` }] }],
                         systemInstruction: { parts: [{ text: systemPrompt }] },
+                        safetySettings: [
+                            { category: "HARM_CATEGORY_HARASSMENT", threshold: "BLOCK_NONE" },
+                            { category: "HARM_CATEGORY_HATE_SPEECH", threshold: "BLOCK_NONE" },
+                            { category: "HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold: "BLOCK_NONE" },
+                            { category: "HARM_CATEGORY_DANGEROUS_CONTENT", threshold: "BLOCK_NONE" }
+                        ],
                         generationConfig: {
                             responseMimeType: "application/json",
                             responseSchema: {
@@ -637,9 +646,23 @@
                     }
 
                     const textResponse = data.candidates?.[0]?.content?.parts?.[0]?.text;
-                    if (!textResponse) throw new Error("Yapay zeka yanıt veremedi.");
+                    if (!textResponse) {
+                        const candidate = data.candidates?.[0];
+                        if (candidate && candidate.finishReason === "SAFETY") {
+                            throw new Error(isEnglish ? "Content flagged by safety filters. Please try other keywords." : "İçerik güvenlik filtresine takıldı. Lütfen başka kelimelerle deneyin.");
+                        }
+                        throw new Error("Yapay zeka yanıt veremedi.");
+                    }
 
-                    books = JSON.parse(textResponse);
+                    let cleanText = textResponse.trim();
+                    if (cleanText.startsWith("```")) {
+                        const match = cleanText.match(/^```(?:json)?\s*([\s\S]*?)\s*```$/);
+                        if (match) {
+                            cleanText = match[1];
+                        }
+                    }
+
+                    books = JSON.parse(cleanText);
                 } else {
                     // Sunucudan (Vercel Proxy) istek at
                     const response = await fetchWithRetry(`/api/recommend`, {

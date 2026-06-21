@@ -41,6 +41,12 @@ Yanıtın kesinlikle belirtilen JSON şemasına uymalıdır. Goodreads/IMDB/Meta
     const payload = {
       contents: [{ parts: [{ text: `Şu içeriğe benzer vibe'a sahip eserler (kitap, film, dizi, oyun vb.) öner: ${query}` }] }],
       systemInstruction: { parts: [{ text: systemPrompt }] },
+      safetySettings: [
+        { category: "HARM_CATEGORY_HARASSMENT", threshold: "BLOCK_NONE" },
+        { category: "HARM_CATEGORY_HATE_SPEECH", threshold: "BLOCK_NONE" },
+        { category: "HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold: "BLOCK_NONE" },
+        { category: "HARM_CATEGORY_DANGEROUS_CONTENT", threshold: "BLOCK_NONE" }
+      ],
       generationConfig: {
         responseMimeType: "application/json",
         responseSchema: {
@@ -77,10 +83,23 @@ Yanıtın kesinlikle belirtilen JSON şemasına uymalıdır. Goodreads/IMDB/Meta
 
     const textResponse = data.candidates?.[0]?.content?.parts?.[0]?.text;
     if (!textResponse) {
+      // Check if blocked by safety
+      const candidate = data.candidates?.[0];
+      if (candidate && candidate.finishReason === "SAFETY") {
+        return res.status(500).json({ error: "İçerik güvenlik filtresine takıldı. Lütfen daha uygun kelimelerle arama yapın." });
+      }
       return res.status(500).json({ error: "Yapay zeka yanıt veremedi." });
     }
 
-    const recommendations = JSON.parse(textResponse);
+    let cleanText = textResponse.trim();
+    if (cleanText.startsWith("```")) {
+      const match = cleanText.match(/^```(?:json)?\s*([\s\S]*?)\s*```$/);
+      if (match) {
+        cleanText = match[1];
+      }
+    }
+
+    const recommendations = JSON.parse(cleanText);
     return res.status(200).json(recommendations);
 
   } catch (error) {
@@ -88,3 +107,4 @@ Yanıtın kesinlikle belirtilen JSON şemasına uymalıdır. Goodreads/IMDB/Meta
     return res.status(500).json({ error: "Sunucu hatası veya geçersiz yanıt." });
   }
 }
+
