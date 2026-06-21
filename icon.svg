@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- Premium dark background for the app icon -->
+  <rect width="512" height="512" rx="112" fill="#2E2723"/>
+  <!-- Centered VibeVault logo mark -->
+  <g transform="scale(9.5) translate(8.5, 8.5)">
+    <circle cx="16" cy="20" r="11" stroke="#D6C3A5" stroke-width="1.8" fill="none"/>
+    <circle cx="24" cy="20" r="11" stroke="#D6C3A5" stroke-width="1.8" stroke-opacity="0.4" fill="none"/>
+    <path d="M20 15L20.8 18.2L24 19L20.8 19.8L20 23L19.2 19.8L16 19L19.2 18.2L20 15Z" fill="#D6C3A5"/>
+  </g>
+</svg>
