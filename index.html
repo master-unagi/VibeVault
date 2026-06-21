@@ -95,22 +95,22 @@
 <body class="min-h-screen flex flex-col font-sans selection:bg-gold-500 selection:text-wood-900">
 
     <!-- Navbar -->
-    <nav class="w-full p-6 flex justify-between items-center backdrop-blur-sm border-b border-wood-700/50 sticky top-0 z-50">
-        <div class="flex items-center gap-3 cursor-pointer group" onclick="showHome()">
+    <nav class="w-full p-4 sm:p-5 md:p-6 flex justify-between items-center backdrop-blur-sm border-b border-wood-700/50 sticky top-0 z-50">
+        <div class="flex items-center gap-2 sm:gap-3 cursor-pointer group" onclick="showHome()">
             <!-- Combination Mark SVG (Amblem) -->
-            <svg width="36" height="36" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-gold-500 group-hover:text-gold-600 transition-colors">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 text-gold-500 group-hover:text-gold-600 transition-colors">
                 <circle cx="16" cy="20" r="11" stroke="currentColor" stroke-width="2"/>
                 <circle cx="24" cy="20" r="11" stroke="currentColor" stroke-width="2" stroke-opacity="0.5"/>
                 <path d="M20 15L20.8 18.2L24 19L20.8 19.8L20 23L19.2 19.8L16 19L19.2 18.2L20 15Z" fill="currentColor"/>
             </svg>
             <!-- Logotip -->
-            <div class="text-3xl font-logo text-gold-500 tracking-wider mt-1 group-hover:text-gold-600 transition-colors">
+            <div class="text-xl sm:text-2xl md:text-3xl font-logo text-gold-500 tracking-wider mt-1 group-hover:text-gold-600 transition-colors">
                 VibeVault
             </div>
         </div>
-        <div class="flex items-center gap-6">
+        <div class="flex items-center gap-2 sm:gap-4 md:gap-6">
             <!-- Dil Seçeneği -->
-            <div class="flex items-center gap-2 text-sm font-medium text-paper-200/70">
+            <div class="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm font-medium text-paper-200/70">
                 <span id="lang-tr" class="text-gold-500">TR</span>
                 <button id="lang-toggle" class="w-10 h-5 bg-wood-700 rounded-full relative flex items-center px-1 transition-colors">
                     <div id="lang-knob" class="w-4 h-4 bg-paper-100 rounded-full shadow-md transform transition-transform duration-300"></div>
@@ -120,14 +120,14 @@
             
             <!-- Nasıl Çalışır İkonu -->
             <button onclick="showAbout()" class="text-paper-100 hover:text-gold-500 transition-colors relative group" title="Nasıl Çalışır?">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 sm:w-6 sm:h-6">
                     <circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/>
                 </svg>
             </button>
 
             <!-- Favoriler İkonu -->
             <button onclick="showFavorites()" class="text-paper-100 hover:text-gold-500 transition-colors relative group" id="nav-fav-btn" title="Favori Listem">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 sm:w-6 sm:h-6">
                     <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
                 </svg>
                 <span id="fav-count" class="absolute -top-2 -right-2 bg-gold-500 text-wood-900 text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full opacity-0 transition-opacity">0</span>
@@ -135,16 +135,9 @@
 
             <!-- API Key Ayarları İkonu -->
             <button onclick="toggleSettingsModal(true)" class="text-paper-100 hover:text-gold-500 transition-colors relative group" id="nav-settings-btn" title="API Anahtarı Ayarları">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 sm:w-6 sm:h-6">
                     <circle cx="12" cy="12" r="3"/>
                     <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
-                </svg>
-            </button>
-
-            <!-- Menü İkonu -->
-            <button class="text-paper-100 hover:text-gold-500 transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/>
                 </svg>
             </button>
         </div>
@@ -167,8 +160,8 @@
                         <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
                     </svg>
                 </div>
-                <input type="text" id="search-input" class="w-full bg-transparent text-paper-100 placeholder-paper-200/50 p-3 outline-none text-lg font-sans" placeholder="Örn: The Matrix, Dune, İskandinav Mitolojisi, Star Wars...">
-                <button id="search-btn" class="bg-gold-600 hover:bg-gold-500 text-wood-900 font-bold py-3 px-6 rounded-md transition-colors shadow-lg flex items-center gap-2">
+                <input type="text" id="search-input" class="w-full bg-transparent text-paper-100 placeholder-paper-200/50 p-2 sm:p-3 outline-none text-base sm:text-lg font-sans" placeholder="Örn: The Matrix, Dune, İskandinav Mitolojisi, Star Wars...">
+                <button id="search-btn" class="bg-gold-600 hover:bg-gold-500 text-wood-900 font-bold py-2 px-4 sm:py-3 sm:px-6 rounded-md transition-colors shadow-lg flex items-center gap-2">
                     <span id="btn-text">Ara</span>
                     <div id="btn-loader" class="loader hidden"></div>
                     <span id="loading-text" class="hidden text-sm ml-2 w-max text-wood-900 font-medium"></span>
