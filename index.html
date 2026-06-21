@@ -75,14 +75,8 @@
             background: #D6C3A5;
         }
 
-        .loader {
-            border: 3px solid rgba(214, 195, 165, 0.3);
-            border-radius: 50%;
-            border-top: 3px solid #D6C3A5;
-            width: 24px;
-            height: 24px;
-            -webkit-animation: spin 1s linear infinite;
-            animation: spin 1s linear infinite;
+        .animate-spin-slow {
+            animation: spin 3s linear infinite;
         }
         @keyframes spin {
             0% { transform: rotate(0deg); }
@@ -166,8 +160,8 @@
                     <input type="text" id="search-input" class="w-full bg-transparent text-paper-100 placeholder-paper-200/50 p-2 sm:p-3 outline-none text-base sm:text-lg font-sans" placeholder="Örn: The Matrix, Dune, İskandinav Mitolojisi, Star Wars...">
                     <button id="search-btn" class="bg-gold-600 hover:bg-gold-500 text-wood-900 font-bold py-2 px-4 sm:py-3 sm:px-6 rounded-md transition-colors shadow-lg flex items-center gap-2">
                         <span id="btn-text">Ara</span>
-                        <div id="btn-loader" class="hidden animate-spin text-wood-900">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
+                        <div id="btn-loader" class="hidden animate-spin-slow text-wood-900">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
                                 <path d="M5 2h14"/>
                                 <path d="M5 22h14"/>
                                 <path d="M19 2v4c0 3.87-3.13 7-7 7s-7-3.13-7-7V2"/>
