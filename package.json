@@ -1,5 +1,8 @@
 {
   "name": "vibevault",
   "version": "1.0.0",
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "@vercel/speed-insights": "^2.0.0"
+  }
 }
