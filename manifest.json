@@ -1,0 +1,17 @@
+{
+  "name": "VibeVault",
+  "short_name": "VibeVault",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#2E2723",
+  "theme_color": "#2E2723",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/3845/3845808.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
