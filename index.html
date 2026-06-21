@@ -166,7 +166,14 @@
                     <input type="text" id="search-input" class="w-full bg-transparent text-paper-100 placeholder-paper-200/50 p-2 sm:p-3 outline-none text-base sm:text-lg font-sans" placeholder="Örn: The Matrix, Dune, İskandinav Mitolojisi, Star Wars...">
                     <button id="search-btn" class="bg-gold-600 hover:bg-gold-500 text-wood-900 font-bold py-2 px-4 sm:py-3 sm:px-6 rounded-md transition-colors shadow-lg flex items-center gap-2">
                         <span id="btn-text">Ara</span>
-                        <div id="btn-loader" class="loader hidden"></div>
+                        <div id="btn-loader" class="hidden animate-spin text-wood-900">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
+                                <path d="M5 2h14"/>
+                                <path d="M5 22h14"/>
+                                <path d="M19 2v4c0 3.87-3.13 7-7 7s-7-3.13-7-7V2"/>
+                                <path d="M5 22v-4c0-3.87 3.13-7 7-7s7 3.13 7 7v4"/>
+                            </svg>
+                        </div>
                     </button>
                 </div>
             </div>
@@ -198,7 +205,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="m15 18-6-6 6-6"/>
                     </svg>
-                    <span id="back-btn-text">Geri Dön</span>
+                    <span id="back-btn-text">Yeni Arama</span>
                 </button>
             </div>
         </div>
@@ -207,8 +214,18 @@
         <div id="error-message" class="hidden bg-red-900/50 border border-red-500/50 text-paper-100 p-4 rounded-lg mb-6 text-center"></div>
 
         <!-- Kitap Grid -->
-        <div id="books-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pb-12">
+        <div id="books-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pb-4">
             <!-- Kitap kartları buraya JS ile yüklenecek -->
+        </div>
+
+        <!-- Alt Kısım Yeni Arama Butonu (Kullanıcı aşağı kaydırdığında kolaylık sağlar) -->
+        <div id="bottom-search-container" class="flex justify-center mt-8 mb-12">
+            <button onclick="showHome()" class="bg-wood-800 hover:bg-wood-700 border border-wood-700 text-gold-500 hover:text-gold-400 font-medium py-3 px-8 rounded-lg transition-colors shadow-lg flex items-center gap-2 text-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m15 18-6-6 6-6"/>
+                </svg>
+                <span class="new-search-bottom-text">Yeni Arama Yap</span>
+            </button>
         </div>
     </main>
 
@@ -468,15 +485,15 @@
                 
                 if (homeTitle) homeTitle.innerText = "Find Your Next Adventure";
                 if (homeSubtitle) homeSubtitle.innerText = "Type in a movie, TV show, book or video game you love, and we'll fetch recommendations with the exact same vibe.";
-                if (backBtnText) backBtnText.innerText = "Go Back";
+                if (backBtnText) backBtnText.innerText = "New Search";
                 if (footerText) footerText.innerText = "VibeVault © 2026 - AI-Powered Curation by Master Unagi";
-
+ 
                 if (aboutTitle) aboutTitle.innerText = "What is VibeVault?";
                 if (aboutP1) aboutP1.innerText = "VibeVault is not a simple genre-matching algorithm. It is an AI-powered curation engine that analyzes the underlying 'vibe', core themes, and psychological depth of the content you consume.";
                 if (aboutP2) aboutP2.innerText = "HOW IT WORKS?";
                 if (aboutP3) aboutP3.innerText = "When you enter a movie, show, book, or game, the system reads the cultural DNA and tropes (e.g., hero's journey, isolation, dark humor) of that piece. It then matches you with works from different media types that will take you to the same atmosphere and similar aesthetic.";
                 if (aboutP4) aboutP4.innerText = "\"It goes beyond genres, it matches feelings.\"";
-
+ 
                 if (settingsTitle) settingsTitle.innerText = "Gemini API Settings";
                 if (settingsDesc) settingsDesc.innerText = "You need to enter your Gemini API key to make searches. Your key is stored securely in your browser (localStorage).";
                 if (apiKeyInput) apiKeyInput.placeholder = "API Key (AIzaSy...)";
@@ -492,7 +509,7 @@
                 
                 if (homeTitle) homeTitle.innerText = "Sıradaki Maceranı Bul";
                 if (homeSubtitle) homeSubtitle.innerText = "Sevdiğin bir filmi, diziyi veya oyunu yaz, sana aynı hissi veren içerikleri getirelim.";
-                if (backBtnText) backBtnText.innerText = "Geri Dön";
+                if (backBtnText) backBtnText.innerText = "Yeni Arama";
                 if (footerText) footerText.innerText = "VibeVault © 2026 - Yapay Zeka Destekli Kürasyon by Master Unagi";
                 
                 if (aboutTitle) aboutTitle.innerText = "VibeVault Nedir?";
@@ -500,7 +517,7 @@
                 if (aboutP2) aboutP2.innerText = "NASIL ÇALIŞIR?";
                 if (aboutP3) aboutP3.innerText = "Bir film, dizi, kitap veya oyun adı girdiğinizde, sistem bu eserin kültürel DNA'sını ve trope'larını (yolculuk, yalnızlık, isyan, kara mizah vb.) okur. Ardından sizi aynı atmosfere ve benzer estetiğe götürecek, farklı medya türlerinden eserlerle eşleştirir.";
                 if (aboutP4) aboutP4.innerText = "\"Türlerin ötesine geçer, hisleri eşleştirir.\"";
-
+ 
                 if (settingsTitle) settingsTitle.innerText = "Gemini API Ayarları";
                 if (settingsDesc) settingsDesc.innerText = "Arama yapabilmek için kendi Gemini API anahtarınızı girmeniz gerekmektedir. Anahtarınız tarayıcınızda (localStorage) güvenle saklanır.";
                 if (apiKeyInput) apiKeyInput.placeholder = "API Anahtarı (AIzaSy...)";
@@ -508,6 +525,13 @@
                 if (navFavBtn) navFavBtn.title = "Favori Listem";
                 if (navSettingsBtn) navSettingsBtn.title = "API Anahtarı Ayarları";
             }
+
+            // Alt kısımdaki Yeni Arama butonu çevirileri
+            const bottomSearchTexts = document.querySelectorAll('.new-search-bottom-text');
+            bottomSearchTexts.forEach(el => {
+                el.innerText = isEnglish ? "Start New Search" : "Yeni Arama Yap";
+            });
+
             setRandomQuote();
             if (currentBooks.length > 0) {
                 renderBooks(currentBooks);
@@ -922,7 +946,13 @@
             
             if (resultsTitle.innerText === "Favori Listem" || resultsTitle.innerText === "My Favorites") {
                 showFavorites();
+                // Favoriler listesindeyken alt kısım arama butonunu gizle
+                const bottomBtn = document.getElementById('bottom-search-container');
+                if (bottomBtn) bottomBtn.classList.add('hidden');
             } else {
+                // Arama sonuçlarındayken alt kısım arama butonunu göster
+                const bottomBtn = document.getElementById('bottom-search-container');
+                if (bottomBtn) bottomBtn.classList.remove('hidden');
                 if (btnElement) {
                     const svg = btnElement.querySelector('svg');
                     if (svg) {
