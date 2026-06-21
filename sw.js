@@ -1,11 +1,11 @@
 const CACHE_NAME = 'vibevault-cache-v1';
 const ASSETS = [
+  './',
   './index.html',
   './manifest.json',
-  'https://cdn.tailwindcss.com',
-  'https://fonts.cdnfonts.com/css/biarty',
-  'https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@400&display=swap'
+  './icon.svg'
 ];
+
 
 self.addEventListener('install', (e) => {
   e.waitUntil(
