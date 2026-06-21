@@ -550,10 +550,57 @@
             errorMessage.classList.remove('hidden');
         }
 
+        // --- ÖNBELLEKLEME (CACHING) YARDIMCILARI ---
+        const CACHE_KEY = 'vibeVaultSearchCache';
+        const MAX_CACHE_SIZE = 50;
+
+        function getCachedResults(query, isEnglish) {
+            try {
+                const cacheRaw = localStorage.getItem(CACHE_KEY);
+                if (!cacheRaw) return null;
+                const cache = JSON.parse(cacheRaw);
+                const cacheId = `${query.trim().toLowerCase()}-${isEnglish ? 'en' : 'tr'}`;
+                return cache[cacheId] || null;
+            } catch (e) {
+                console.error('Cache read error:', e);
+            }
+            return null;
+        }
+
+        function setCachedResults(query, isEnglish, results) {
+            try {
+                const cacheRaw = localStorage.getItem(CACHE_KEY);
+                let cache = cacheRaw ? JSON.parse(cacheRaw) : {};
+                const cacheId = `${query.trim().toLowerCase()}-${isEnglish ? 'en' : 'tr'}`;
+                
+                cache[cacheId] = results;
+                
+                // En eski aramayı silerek yer aç (LRU)
+                const keys = Object.keys(cache);
+                if (keys.length > MAX_CACHE_SIZE) {
+                    delete cache[keys[0]];
+                }
+                
+                localStorage.setItem(CACHE_KEY, JSON.stringify(cache));
+            } catch (e) {
+                console.error('Cache write error:', e);
+            }
+        }
+
         // --- YAOAY ZEKA (GEMINI) ENTEGRASYONU ---
         async function handleSearch() {
             const query = searchInput.value.trim();
             if (!query) return;
+
+            // Önbellek kontrolü (Quota tasarrufu sağlar)
+            const cachedBooks = getCachedResults(query, isEnglish);
+            if (cachedBooks) {
+                console.log('Serving from local cache:', query);
+                currentBooks = cachedBooks;
+                renderBooks(cachedBooks);
+                showResults(isEnglish ? `Recommendations for "${query}"` : `"${query}" için Öneriler`);
+                return;
+            }
 
             // API Key kontrolü useDirectCall içindeki local/custom logic'e taşındı.
 
@@ -681,6 +728,9 @@
                 
                 // Puanları büyükten küçüğe sıralama işlemi
                 books.sort((a, b) => b.matchScore - a.matchScore);
+
+                // Sonuçları önbelleğe kaydet
+                setCachedResults(query, isEnglish, books);
 
                 currentBooks = books; 
                 renderBooks(books);
