@@ -68,7 +68,11 @@ Yanıtın kesinlikle belirtilen JSON şemasına uymalıdır. Goodreads/IMDB/Meta
             properties: {
               title: { type: "STRING", description: "Eserin adı" },
               author: { type: "STRING", description: "Yazar / Yönetmen / Geliştirici / Tasarımcı adı" },
-              category: { type: "STRING", description: "Kategori: 'book', 'movie', 'tv', 'game', 'boardgame' değerlerinden biri" },
+              category: { 
+                type: "STRING", 
+                enum: backendCategories,
+                description: `Kategori: Sadece şu değerlerden biri olmalıdır: ${allowedCatsStr}`
+              },
               reason: { type: "STRING", description: "Neden önerildi? Hangi temalar ve vibe eşleşti? Kısa bir açıklama." },
               rating: { type: "NUMBER", description: "Değerlendirme puanı (Örn: 8.5 veya 4.15)" },
               reviews: { type: "STRING", description: "Değerlendirme sayısı (Örn: 15K veya 2M)" },

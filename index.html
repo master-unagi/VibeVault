@@ -212,7 +212,7 @@
                 </button>
                 <!-- Oyun -->
                 <button onclick="toggleCategory('game')" id="chip-game" class="flex items-center gap-2 px-4 py-2 rounded-full border border-gold-600 bg-gold-600 text-wood-900 hover:bg-gold-500 font-medium text-sm transition-all duration-300 shadow-md">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5"><rect x="2" y="6" width="20" height="12" rx="20"/><path d="M6 12h4"/><path d="M8 10v4"/><circle cx="15" cy="13" r="1"/><circle cx="18" cy="11" r="1"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5"><rect x="2" y="6" width="20" height="12" rx="3"/><path d="M6 12h4"/><path d="M8 10v4"/><circle cx="15" cy="13" r="1"/><circle cx="18" cy="11" r="1"/></svg>
                     <span id="label-game">Oyun</span>
                 </button>
             </div>
@@ -267,7 +267,7 @@
             </button>
             <!-- Oyun -->
             <button onclick="toggleResultsFilter('game')" id="res-chip-game" class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-gold-600 bg-gold-600 text-wood-900 hover:bg-gold-500 font-medium text-xs transition-all duration-300 shadow-sm">
-                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3"><rect x="2" y="6" width="20" height="12" rx="20"/><path d="M6 12h4"/><path d="M8 10v4"/><circle cx="15" cy="13" r="1"/><circle cx="18" cy="11" r="1"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3"><rect x="2" y="6" width="20" height="12" rx="3"/><path d="M6 12h4"/><path d="M8 10v4"/><circle cx="15" cy="13" r="1"/><circle cx="18" cy="11" r="1"/></svg>
                 <span id="res-label-game">Oyun</span>
             </button>
         </div>
@@ -899,7 +899,11 @@
                                     properties: {
                                         title: { type: "STRING", description: "Eserin adı" },
                                         author: { type: "STRING", description: "Yazar / Yönetmen / Geliştirici / Tasarımcı adı" },
-                                        category: { type: "STRING", description: "Kategori: 'book', 'movie', 'tv', 'game', 'boardgame' değerlerinden biri" },
+                                        category: { 
+                                            type: "STRING", 
+                                            enum: backendCategories,
+                                            description: `Kategori: Sadece şu değerlerden biri olmalıdır: ${allowedCatsStr}`
+                                        },
                                         reason: { type: "STRING", description: "Neden önerildi? Hangi temalar ve vibe eşleşti? Kısa bir açıklama." },
                                         rating: { type: "NUMBER", description: "Değerlendirme puanı (Örn: 8.5 veya 4.15)" },
                                         reviews: { type: "STRING", description: "Değerlendirme sayısı (Örn: 15K veya 2M)" },
@@ -1019,7 +1023,7 @@
                 },
                 'game': { 
                     label: isEnglish ? 'VIDEO GAME' : 'VİDEO OYUNU', 
-                    icon: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="20"/><path d="M6 12h4"/><path d="M8 10v4"/><circle cx="15" cy="13" r="1"/><circle cx="18" cy="11" r="1"/></svg>'
+                    icon: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="3"/><path d="M6 12h4"/><path d="M8 10v4"/><circle cx="15" cy="13" r="1"/><circle cx="18" cy="11" r="1"/></svg>'
                 },
                 'boardgame': { 
                     label: isEnglish ? 'BOARD GAME' : 'KUTU OYUNU', 
