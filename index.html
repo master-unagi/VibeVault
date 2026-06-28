@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VibeVault</title>
-    <meta name="description" content="VibeVault - Yapay zeka destekli tema ve atmosfer kürasyon motoru. Sevdiğiniz film, dizi, kitap veya oyunları yazın; size aynı vibe ve temaya sahip önerileri getirelim.">
+    <meta name="description"
+        content="VibeVault - Yapay zeka destekli tema ve atmosfer kürasyon motoru. Sevdiğiniz film, dizi, kitap veya oyunları yazın; size aynı vibe ve temaya sahip önerileri getirelim.">
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#2E2723">
     <link rel="icon" type="image/svg+xml" href="icon.svg">
@@ -12,7 +14,7 @@
     <script>
         // Suppress cdn.tailwindcss.com production warning
         const originalWarn = console.warn;
-        console.warn = function(...args) {
+        console.warn = function (...args) {
             if (args[0] && typeof args[0] === 'string' && args[0].includes('cdn.tailwindcss.com')) return;
             originalWarn.apply(console, args);
         };
@@ -22,7 +24,9 @@
         console.warn = originalWarn;
     </script>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@400&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@400&display=swap"
+        rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
@@ -62,26 +66,29 @@
             background-attachment: fixed;
             color: #F7F3EC;
         }
-        
+
         /* Eski kağıt dokusu efekti */
         .paper-card {
             background-color: #F7F3EC;
             background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');
             color: #2E2723;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
         }
 
         /* Özel scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
         }
+
         ::-webkit-scrollbar-track {
             background: #2E2723;
         }
+
         ::-webkit-scrollbar-thumb {
             background: #7B6553;
             border-radius: 4px;
         }
+
         ::-webkit-scrollbar-thumb:hover {
             background: #D6C3A5;
         }
@@ -89,34 +96,44 @@
         .animate-spin-slow {
             animation: spin 3s linear infinite;
         }
+
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
-        
+
         .quote-box.expanded {
             grid-template-rows: 1fr !important;
         }
     </style>
     <!-- Vercel Web Analytics -->
     <script>
-      window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
     </script>
     <script defer src="/_vercel/insights/script.js"></script>
 </head>
+
 <body class="min-h-screen flex flex-col font-sans selection:bg-gold-500 selection:text-wood-900">
 
     <!-- Navbar -->
-    <nav class="w-full p-4 sm:p-5 md:p-6 flex justify-between items-center backdrop-blur-sm border-b border-wood-700/50 sticky top-0 z-50">
+    <nav
+        class="w-full p-4 sm:p-5 md:p-6 flex justify-between items-center backdrop-blur-sm border-b border-wood-700/50 sticky top-0 z-50">
         <div class="flex items-center gap-2 sm:gap-3 cursor-pointer group" onclick="showHome()">
             <!-- Combination Mark SVG (Amblem) -->
-            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 text-gold-500 group-hover:text-gold-600 transition-colors">
-                <circle cx="16" cy="20" r="11" stroke="currentColor" stroke-width="2"/>
-                <circle cx="24" cy="20" r="11" stroke="currentColor" stroke-width="2" stroke-opacity="0.5"/>
-                <path d="M20 15L20.8 18.2L24 19L20.8 19.8L20 23L19.2 19.8L16 19L19.2 18.2L20 15Z" fill="currentColor"/>
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"
+                class="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 text-gold-500 group-hover:text-gold-600 transition-colors">
+                <circle cx="16" cy="20" r="11" stroke="currentColor" stroke-width="2" />
+                <circle cx="24" cy="20" r="11" stroke="currentColor" stroke-width="2" stroke-opacity="0.5" />
+                <path d="M20 15L20.8 18.2L24 19L20.8 19.8L20 23L19.2 19.8L16 19L19.2 18.2L20 15Z" fill="currentColor" />
             </svg>
             <!-- Logotip -->
-            <div class="text-xl sm:text-2xl md:text-3xl font-logo text-gold-500 tracking-wider mt-1 group-hover:text-gold-600 transition-colors">
+            <div
+                class="text-xl sm:text-2xl md:text-3xl font-logo text-gold-500 tracking-wider mt-1 group-hover:text-gold-600 transition-colors">
                 VibeVault
             </div>
         </div>
@@ -124,100 +141,177 @@
             <!-- Dil Seçeneği -->
             <div class="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm font-medium text-paper-200/70">
                 <span id="lang-tr" class="text-gold-500">TR</span>
-                <button id="lang-toggle" class="w-10 h-5 bg-wood-700 rounded-full relative flex items-center px-1 transition-colors">
-                    <div id="lang-knob" class="w-4 h-4 bg-paper-100 rounded-full shadow-md transform transition-transform duration-300"></div>
+                <button id="lang-toggle"
+                    class="w-10 h-5 bg-wood-700 rounded-full relative flex items-center px-1 transition-colors">
+                    <div id="lang-knob"
+                        class="w-4 h-4 bg-paper-100 rounded-full shadow-md transform transition-transform duration-300">
+                    </div>
                 </button>
                 <span id="lang-en">EN</span>
             </div>
-            
+
             <!-- Nasıl Çalışır İkonu -->
-            <button onclick="showAbout()" class="text-paper-100 hover:text-gold-500 transition-colors relative group" title="Nasıl Çalışır?">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 sm:w-6 sm:h-6">
-                    <circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/>
+            <button onclick="showAbout()" class="text-paper-100 hover:text-gold-500 transition-colors relative group"
+                title="Nasıl Çalışır?">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 sm:w-6 sm:h-6">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 16v-4" />
+                    <path d="M12 8h.01" />
                 </svg>
             </button>
 
             <!-- Favoriler İkonu -->
-            <button onclick="showFavorites()" class="text-paper-100 hover:text-gold-500 transition-colors relative group" id="nav-fav-btn" title="Favori Listem">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 sm:w-6 sm:h-6">
-                    <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+            <button onclick="showFavorites()"
+                class="text-paper-100 hover:text-gold-500 transition-colors relative group" id="nav-fav-btn"
+                title="Favori Listem">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 sm:w-6 sm:h-6">
+                    <path
+                        d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
                 </svg>
-                <span id="fav-count" class="absolute -top-2 -right-2 bg-gold-500 text-wood-900 text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full opacity-0 transition-opacity">0</span>
+                <span id="fav-count"
+                    class="absolute -top-2 -right-2 bg-gold-500 text-wood-900 text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full opacity-0 transition-opacity">0</span>
             </button>
 
             <!-- API Key Ayarları İkonu (Varsayılan olarak gizli, yerelde gösterilecek) -->
-            <button onclick="toggleSettingsModal(true)" class="hidden text-paper-100 hover:text-gold-500 transition-colors relative group" id="nav-settings-btn" title="API Anahtarı Ayarları">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 sm:w-6 sm:h-6">
-                    <circle cx="12" cy="12" r="3"/>
-                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+            <button onclick="toggleSettingsModal(true)"
+                class="hidden text-paper-100 hover:text-gold-500 transition-colors relative group" id="nav-settings-btn"
+                title="API Anahtarı Ayarları">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 sm:w-6 sm:h-6">
+                    <circle cx="12" cy="12" r="3" />
+                    <path
+                        d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
                 </svg>
             </button>
         </div>
     </nav>
 
     <!-- Ana İçerik (Home) -->
-    <main id="home-view" class="flex-grow flex flex-col items-center justify-center p-6 w-full max-w-3xl mx-auto transition-opacity duration-500">
-        
+    <main id="home-view"
+        class="flex-grow flex flex-col items-center justify-center p-6 w-full max-w-3xl mx-auto transition-opacity duration-500">
+
         <div class="text-center mb-10 w-full">
-            <h1 id="home-title" class="text-4xl md:text-5xl font-serif font-bold text-paper-100 mb-4 drop-shadow-lg">Benzer Dünyaları Keşfe Çık</h1>
-            <p id="home-subtitle" class="text-paper-200/80 text-lg md:text-xl font-light">Tadı damağında kalan bir kitabı, filmi, diziyi veya oyunu yaz; onunla benzer temaları, dünyaları ve atmosferi paylaşan yeni maceraları VibeVault arşivlerinden senin için çıkaralım.</p>
+            <h1 id="home-title" class="text-4xl md:text-5xl font-serif font-bold text-paper-100 mb-4 drop-shadow-lg">
+                Benzer Dünyaları Keşfe Çık</h1>
+            <p id="home-subtitle" class="text-paper-200/80 text-lg md:text-xl font-light">Tadı damağında kalan bir
+                kitabı, filmi, diziyi veya oyunu yaz; onunla benzer temaları, dünyaları ve atmosferi paylaşan yeni
+                maceraları VibeVault arşivlerinden senin için çıkaralım.</p>
         </div>
 
         <!-- Arama Kutusu -->
         <div class="w-full relative group mb-12 flex flex-col items-center">
             <div class="w-full relative">
-                <div class="absolute -inset-0.5 bg-gradient-to-r from-gold-600 to-wood-700 rounded-lg blur opacity-30 group-hover:opacity-60 transition duration-1000 group-hover:duration-200"></div>
-                <div class="relative flex items-center bg-wood-800/90 rounded-lg border border-wood-700 p-2 shadow-2xl backdrop-blur-sm">
+                <div
+                    class="absolute -inset-0.5 bg-gradient-to-r from-gold-600 to-wood-700 rounded-lg blur opacity-30 group-hover:opacity-60 transition duration-1000 group-hover:duration-200">
+                </div>
+                <div
+                    class="relative flex items-center bg-wood-800/90 rounded-lg border border-wood-700 p-2 shadow-2xl backdrop-blur-sm">
                     <div class="pl-4 pr-2 text-gold-500">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8" />
+                            <path d="m21 21-4.3-4.3" />
                         </svg>
                     </div>
-                    <input type="text" id="search-input" class="w-full bg-transparent text-paper-100 placeholder-paper-200/50 p-2 sm:p-3 outline-none text-base sm:text-lg font-sans" placeholder="Örn: The Matrix, Dune, İskandinav Mitolojisi, Star Wars...">
-                    <button id="search-btn" class="bg-gold-600 hover:bg-gold-500 text-wood-900 font-bold py-2 px-4 sm:py-3 sm:px-6 rounded-md transition-colors shadow-lg flex items-center gap-2">
+                    <input type="text" id="search-input"
+                        class="w-full bg-transparent text-paper-100 placeholder-paper-200/50 p-2 sm:p-3 outline-none text-base sm:text-lg font-sans"
+                        placeholder="Örn: The Matrix, Dune, İskandinav Mitolojisi, Star Wars...">
+                    <button id="search-btn"
+                        class="bg-gold-600 hover:bg-gold-500 text-wood-900 font-bold py-2 px-4 sm:py-3 sm:px-6 rounded-md transition-colors shadow-lg flex items-center gap-2">
                         <span id="btn-text">Ara</span>
                         <div id="btn-loader" class="hidden animate-spin-slow text-wood-900">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
-                                <path d="M5 2h14"/>
-                                <path d="M5 22h14"/>
-                                <path d="M19 2v4c0 3.87-3.13 7-7 7s-7-3.13-7-7V2"/>
-                                <path d="M5 22v-4c0-3.87 3.13-7 7-7s7 3.13 7 7v4"/>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="w-5 h-5">
+                                <path d="M5 2h14" />
+                                <path d="M5 22h14" />
+                                <path d="M19 2v4c0 3.87-3.13 7-7 7s-7-3.13-7-7V2" />
+                                <path d="M5 22v-4c0-3.87 3.13-7 7-7s7 3.13 7 7v4" />
                             </svg>
                         </div>
                     </button>
                 </div>
             </div>
             <!-- Yüklenme Aşamaları Yazısı (Mobilde taşmayı ve genişlemeyi önler) -->
-            <div id="loading-text" class="hidden text-sm mt-3 text-gold-500 font-medium tracking-wide animate-pulse text-center"></div>
+            <div id="loading-text"
+                class="hidden text-sm mt-3 text-gold-500 font-medium tracking-wide animate-pulse text-center"></div>
         </div>
 
         <!-- Kategori Çipleri -->
         <div class="w-full flex flex-col items-center -mt-4 mb-10">
-            <span id="category-select-label" class="text-xs font-bold tracking-widest text-gold-500/80 uppercase mb-3">Öneri Kategorileri</span>
+            <span id="category-select-label"
+                class="text-xs font-bold tracking-widest text-gold-500/80 uppercase mb-3">Öneri Kategorileri</span>
             <div class="flex flex-wrap justify-center gap-3">
                 <!-- Kitap -->
-                <button onclick="toggleCategory('book')" id="chip-book" class="flex items-center gap-2 px-4 py-2 rounded-full border border-wood-700 bg-wood-800/50 text-paper-200 hover:bg-wood-700/30 font-medium text-sm transition-all duration-300 shadow-md">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
+                <button onclick="toggleCategory('book')" id="chip-book"
+                    class="flex items-center gap-2 px-4 py-2 rounded-full border border-wood-700 bg-wood-800/50 text-paper-200 hover:bg-wood-700/30 font-medium text-sm transition-all duration-300 shadow-md">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="w-3.5 h-3.5">
+                        <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20" />
+                    </svg>
                     <span id="label-book">Kitap</span>
                 </button>
                 <!-- Film -->
-                <button onclick="toggleCategory('movie')" id="chip-movie" class="flex items-center gap-2 px-4 py-2 rounded-full border border-wood-700 bg-wood-800/50 text-paper-200 hover:bg-wood-700/30 font-medium text-sm transition-all duration-300 shadow-md">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/></svg>
+                <button onclick="toggleCategory('movie')" id="chip-movie"
+                    class="flex items-center gap-2 px-4 py-2 rounded-full border border-wood-700 bg-wood-800/50 text-paper-200 hover:bg-wood-700/30 font-medium text-sm transition-all duration-300 shadow-md">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="w-3.5 h-3.5">
+                        <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18" />
+                        <line x1="7" y1="2" x2="7" y2="22" />
+                        <line x1="17" y1="2" x2="17" y2="22" />
+                        <line x1="2" y1="12" x2="22" y2="12" />
+                        <line x1="2" y1="7" x2="7" y2="7" />
+                        <line x1="2" y1="17" x2="7" y2="17" />
+                        <line x1="17" y1="17" x2="22" y2="17" />
+                        <line x1="17" y1="7" x2="22" y2="7" />
+                    </svg>
                     <span id="label-movie">Film</span>
                 </button>
                 <!-- Dizi -->
-                <button onclick="toggleCategory('tv')" id="chip-tv" class="flex items-center gap-2 px-4 py-2 rounded-full border border-wood-700 bg-wood-800/50 text-paper-200 hover:bg-wood-700/30 font-medium text-sm transition-all duration-300 shadow-md">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"/><polyline points="17 2 12 7 7 2"/></svg>
+                <button onclick="toggleCategory('tv')" id="chip-tv"
+                    class="flex items-center gap-2 px-4 py-2 rounded-full border border-wood-700 bg-wood-800/50 text-paper-200 hover:bg-wood-700/30 font-medium text-sm transition-all duration-300 shadow-md">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="w-3.5 h-3.5">
+                        <rect x="2" y="7" width="20" height="15" rx="2" ry="2" />
+                        <polyline points="17 2 12 7 7 2" />
+                    </svg>
                     <span id="label-tv">Dizi</span>
                 </button>
                 <!-- Video Oyunu -->
-                <button onclick="toggleCategory('game')" id="chip-game" class="flex items-center gap-2 px-4 py-2 rounded-full border border-wood-700 bg-wood-800/50 text-paper-200 hover:bg-wood-700/30 font-medium text-sm transition-all duration-300 shadow-md">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 512 512" fill="currentColor" class="w-3.5 h-3.5"><path d="M467.51 248.83c-18.4-83.18-45.69-136.24-89.43-149.17A91.5 91.5 0 00352 96c-26.89 0-48.11 16-96 16s-69.15-16-96-16a99.09 99.09 0 00-27.2 3.66C89 112.59 61.94 165.7 43.33 248.83c-19 84.91-15.56 152 21.58 164.88 26 9 49.25-9.61 71.27-37 25-31.2 55.79-40.8 119.82-40.8s93.62 9.6 118.66 40.8c22 27.41 46.11 45.79 71.42 37.16 41.02-14.01 40.44-79.13 21.43-165.04z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/><circle cx="292" cy="224" r="20"/><circle cx="336" cy="268" r="20"/><circle cx="336" cy="180" r="20"/><circle cx="380" cy="224" r="20"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M160 176v96M208 224h-96"/></svg>
+                <button onclick="toggleCategory('game')" id="chip-game"
+                    class="flex items-center gap-2 px-4 py-2 rounded-full border border-wood-700 bg-wood-800/50 text-paper-200 hover:bg-wood-700/30 font-medium text-sm transition-all duration-300 shadow-md">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 512 512"
+                        fill="currentColor" class="w-3.5 h-3.5">
+                        <path
+                            d="M467.51 248.83c-18.4-83.18-45.69-136.24-89.43-149.17A91.5 91.5 0 00352 96c-26.89 0-48.11 16-96 16s-69.15-16-96-16a99.09 99.09 0 00-27.2 3.66C89 112.59 61.94 165.7 43.33 248.83c-19 84.91-15.56 152 21.58 164.88 26 9 49.25-9.61 71.27-37 25-31.2 55.79-40.8 119.82-40.8s93.62 9.6 118.66 40.8c22 27.41 46.11 45.79 71.42 37.16 41.02-14.01 40.44-79.13 21.43-165.04z"
+                            fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32" />
+                        <circle cx="292" cy="224" r="20" />
+                        <circle cx="336" cy="268" r="20" />
+                        <circle cx="336" cy="180" r="20" />
+                        <circle cx="380" cy="224" r="20" />
+                        <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="32" d="M160 176v96M208 224h-96" />
+                    </svg>
                     <span id="label-game">Video Oyunu</span>
                 </button>
                 <!-- Kutu Oyunu -->
-                <button onclick="toggleCategory('boardgame')" id="chip-boardgame" class="flex items-center gap-2 px-4 py-2 rounded-full border border-wood-700 bg-wood-800/50 text-paper-200 hover:bg-wood-700/30 font-medium text-sm transition-all duration-300 shadow-md">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5"><rect x="2" y="2" width="20" height="20" rx="2"/><circle cx="8" cy="8" r="1.5"/><circle cx="16" cy="16" r="1.5"/><circle cx="8" cy="16" r="1.5"/><circle cx="16" cy="8" r="1.5"/><circle cx="12" cy="12" r="1.5"/></svg>
+                <button onclick="toggleCategory('boardgame')" id="chip-boardgame"
+                    class="flex items-center gap-2 px-4 py-2 rounded-full border border-wood-700 bg-wood-800/50 text-paper-200 hover:bg-wood-700/30 font-medium text-sm transition-all duration-300 shadow-md">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="w-3.5 h-3.5">
+                        <rect x="2" y="2" width="20" height="20" rx="2" />
+                        <circle cx="8" cy="8" r="1.5" />
+                        <circle cx="16" cy="16" r="1.5" />
+                        <circle cx="8" cy="16" r="1.5" />
+                        <circle cx="16" cy="8" r="1.5" />
+                        <circle cx="12" cy="12" r="1.5" />
+                    </svg>
                     <span id="label-boardgame">Kutu Oyunu</span>
                 </button>
             </div>
@@ -226,7 +320,8 @@
         <!-- Günün Alıntısı -->
         <div class="w-full max-w-2xl mt-4 opacity-60 hover:opacity-100 transition-opacity duration-700 cursor-default">
             <div class="px-6 text-center">
-                <p id="quote-text" class="text-xl md:text-2xl font-quote font-normal italic text-gold-500 leading-relaxed mb-3">
+                <p id="quote-text"
+                    class="text-xl md:text-2xl font-quote font-normal italic text-gold-500 leading-relaxed mb-3">
                     "Yükleniyor..."
                 </p>
                 <div class="text-paper-200/50 font-sans text-xs tracking-widest font-semibold">
@@ -243,9 +338,11 @@
         <div class="flex justify-between items-end mb-8 border-b border-wood-700/50 pb-4">
             <h2 id="results-title" class="text-3xl font-serif font-bold text-gold-500">Sonuçlar</h2>
             <div class="flex items-center gap-4">
-                <button onclick="showHome()" class="text-paper-200 hover:text-white text-sm flex items-center gap-2 transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="m15 18-6-6 6-6"/>
+                <button onclick="showHome()"
+                    class="text-paper-200 hover:text-white text-sm flex items-center gap-2 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m15 18-6-6 6-6" />
                     </svg>
                     <span id="back-btn-text">Yeni Arama</span>
                 </button>
@@ -254,36 +351,83 @@
 
         <!-- Sonuç Filtreleme Çipleri -->
         <div id="results-filters-container" class="flex flex-wrap justify-start items-center gap-2.5 mb-6">
-            <span id="results-filter-label" class="text-xs font-bold tracking-wider text-gold-500/60 uppercase mr-1">Filtrele:</span>
+            <span id="results-filter-label"
+                class="text-xs font-bold tracking-wider text-gold-500/60 uppercase mr-1">Filtrele:</span>
             <!-- Kitap -->
-            <button onclick="toggleResultsFilter('book')" id="res-chip-book" class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-gold-600 bg-gold-600 text-wood-900 hover:bg-gold-500 font-medium text-xs transition-all duration-300 shadow-sm">
-                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
+            <button onclick="toggleResultsFilter('book')" id="res-chip-book"
+                class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-gold-600 bg-gold-600 text-wood-900 hover:bg-gold-500 font-medium text-xs transition-all duration-300 shadow-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="w-3 h-3">
+                    <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20" />
+                </svg>
                 <span id="res-label-book">Kitap</span>
             </button>
             <!-- Film -->
-            <button onclick="toggleResultsFilter('movie')" id="res-chip-movie" class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-gold-600 bg-gold-600 text-wood-900 hover:bg-gold-500 font-medium text-xs transition-all duration-300 shadow-sm">
-                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/></svg>
+            <button onclick="toggleResultsFilter('movie')" id="res-chip-movie"
+                class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-gold-600 bg-gold-600 text-wood-900 hover:bg-gold-500 font-medium text-xs transition-all duration-300 shadow-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="w-3 h-3">
+                    <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18" />
+                    <line x1="7" y1="2" x2="7" y2="22" />
+                    <line x1="17" y1="2" x2="17" y2="22" />
+                    <line x1="2" y1="12" x2="22" y2="12" />
+                    <line x1="2" y1="7" x2="7" y2="7" />
+                    <line x1="2" y1="17" x2="7" y2="17" />
+                    <line x1="17" y1="17" x2="22" y2="17" />
+                    <line x1="17" y1="7" x2="22" y2="7" />
+                </svg>
                 <span id="res-label-movie">Film</span>
             </button>
             <!-- Dizi -->
-            <button onclick="toggleResultsFilter('tv')" id="res-chip-tv" class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-gold-600 bg-gold-600 text-wood-900 hover:bg-gold-500 font-medium text-xs transition-all duration-300 shadow-sm">
-                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"/><polyline points="17 2 12 7 7 2"/></svg>
+            <button onclick="toggleResultsFilter('tv')" id="res-chip-tv"
+                class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-gold-600 bg-gold-600 text-wood-900 hover:bg-gold-500 font-medium text-xs transition-all duration-300 shadow-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="w-3 h-3">
+                    <rect x="2" y="7" width="20" height="15" rx="2" ry="2" />
+                    <polyline points="17 2 12 7 7 2" />
+                </svg>
                 <span id="res-label-tv">Dizi</span>
             </button>
             <!-- Video Oyunu -->
-            <button onclick="toggleResultsFilter('game')" id="res-chip-game" class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-gold-600 bg-gold-600 text-wood-900 hover:bg-gold-500 font-medium text-xs transition-all duration-300 shadow-sm">
-                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 512 512" fill="currentColor" class="w-3 h-3"><path d="M467.51 248.83c-18.4-83.18-45.69-136.24-89.43-149.17A91.5 91.5 0 00352 96c-26.89 0-48.11 16-96 16s-69.15-16-96-16a99.09 99.09 0 00-27.2 3.66C89 112.59 61.94 165.7 43.33 248.83c-19 84.91-15.56 152 21.58 164.88 26 9 49.25-9.61 71.27-37 25-31.2 55.79-40.8 119.82-40.8s93.62 9.6 118.66 40.8c22 27.41 46.11 45.79 71.42 37.16 41.02-14.01 40.44-79.13 21.43-165.04z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/><circle cx="292" cy="224" r="20"/><circle cx="336" cy="268" r="20"/><circle cx="336" cy="180" r="20"/><circle cx="380" cy="224" r="20"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M160 176v96M208 224h-96"/></svg>
+            <button onclick="toggleResultsFilter('game')" id="res-chip-game"
+                class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-gold-600 bg-gold-600 text-wood-900 hover:bg-gold-500 font-medium text-xs transition-all duration-300 shadow-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 512 512" fill="currentColor"
+                    class="w-3 h-3">
+                    <path
+                        d="M467.51 248.83c-18.4-83.18-45.69-136.24-89.43-149.17A91.5 91.5 0 00352 96c-26.89 0-48.11 16-96 16s-69.15-16-96-16a99.09 99.09 0 00-27.2 3.66C89 112.59 61.94 165.7 43.33 248.83c-19 84.91-15.56 152 21.58 164.88 26 9 49.25-9.61 71.27-37 25-31.2 55.79-40.8 119.82-40.8s93.62 9.6 118.66 40.8c22 27.41 46.11 45.79 71.42 37.16 41.02-14.01 40.44-79.13 21.43-165.04z"
+                        fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32" />
+                    <circle cx="292" cy="224" r="20" />
+                    <circle cx="336" cy="268" r="20" />
+                    <circle cx="336" cy="180" r="20" />
+                    <circle cx="380" cy="224" r="20" />
+                    <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                        stroke-width="32" d="M160 176v96M208 224h-96" />
+                </svg>
                 <span id="res-label-game">Video Oyunu</span>
             </button>
             <!-- Kutu Oyunu -->
-            <button onclick="toggleResultsFilter('boardgame')" id="res-chip-boardgame" class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-gold-600 bg-gold-600 text-wood-900 hover:bg-gold-500 font-medium text-xs transition-all duration-300 shadow-sm">
-                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3"><rect x="2" y="2" width="20" height="20" rx="2"/><circle cx="8" cy="8" r="1.5"/><circle cx="16" cy="16" r="1.5"/><circle cx="8" cy="16" r="1.5"/><circle cx="16" cy="8" r="1.5"/><circle cx="12" cy="12" r="1.5"/></svg>
+            <button onclick="toggleResultsFilter('boardgame')" id="res-chip-boardgame"
+                class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-gold-600 bg-gold-600 text-wood-900 hover:bg-gold-500 font-medium text-xs transition-all duration-300 shadow-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="w-3 h-3">
+                    <rect x="2" y="2" width="20" height="20" rx="2" />
+                    <circle cx="8" cy="8" r="1.5" />
+                    <circle cx="16" cy="16" r="1.5" />
+                    <circle cx="8" cy="16" r="1.5" />
+                    <circle cx="16" cy="8" r="1.5" />
+                    <circle cx="12" cy="12" r="1.5" />
+                </svg>
                 <span id="res-label-boardgame">Kutu Oyunu</span>
             </button>
         </div>
 
         <!-- Hata / Mesaj Alanı -->
-        <div id="error-message" class="hidden bg-red-900/50 border border-red-500/50 text-paper-100 p-4 rounded-lg mb-6 text-center"></div>
+        <div id="error-message"
+            class="hidden bg-red-900/50 border border-red-500/50 text-paper-100 p-4 rounded-lg mb-6 text-center"></div>
 
         <!-- Kitap Grid -->
         <div id="books-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pb-4">
@@ -292,11 +436,15 @@
 
         <!-- Daha Fazla Öneri Yükle Butonu -->
         <div id="load-more-container" class="flex justify-center mt-6 mb-8 hidden">
-            <button id="load-more-btn" onclick="loadMoreRecommendations()" class="bg-gold-600 hover:bg-gold-500 text-wood-900 font-bold py-3.5 px-8 rounded-lg transition-all duration-300 shadow-lg flex items-center gap-2 text-sm">
+            <button id="load-more-btn" onclick="loadMoreRecommendations()"
+                class="bg-gold-600 hover:bg-gold-500 text-wood-900 font-bold py-3.5 px-8 rounded-lg transition-all duration-300 shadow-lg flex items-center gap-2 text-sm">
                 <!-- Loader spinner -->
-                <svg id="load-more-loader" class="animate-spin h-5 w-5 text-wood-900 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <svg id="load-more-loader" class="animate-spin h-5 w-5 text-wood-900 hidden"
+                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                     <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    <path class="opacity-75" fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                    </path>
                 </svg>
                 <span id="load-more-text">Daha Fazla Öneri Yükle</span>
             </button>
@@ -304,9 +452,11 @@
 
         <!-- Alt Kısım Yeni Arama Butonu (Kullanıcı aşağı kaydırdığında kolaylık sağlar) -->
         <div id="bottom-search-container" class="flex justify-center mt-8 mb-12">
-            <button onclick="showHome()" class="bg-wood-800 hover:bg-wood-700 border border-wood-700 text-gold-500 hover:text-gold-400 font-medium py-3 px-8 rounded-lg transition-colors shadow-lg flex items-center gap-2 text-sm">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="m15 18-6-6 6-6"/>
+            <button onclick="showHome()"
+                class="bg-wood-800 hover:bg-wood-700 border border-wood-700 text-gold-500 hover:text-gold-400 font-medium py-3 px-8 rounded-lg transition-colors shadow-lg flex items-center gap-2 text-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m15 18-6-6 6-6" />
                 </svg>
                 <span class="new-search-bottom-text">Yeni Arama Yap</span>
             </button>
@@ -316,20 +466,32 @@
     <!-- Nasıl Çalışır? / About Görünümü -->
     <main id="about-view" class="flex-grow p-6 w-full max-w-3xl mx-auto hidden flex-col justify-center">
         <div class="bg-wood-800/80 border border-wood-700 rounded-xl p-8 md:p-12 relative shadow-2xl">
-            <button onclick="showHome()" class="absolute top-6 right-6 text-paper-200 hover:text-gold-500 transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            <button onclick="showHome()"
+                class="absolute top-6 right-6 text-paper-200 hover:text-gold-500 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
             </button>
-            
-            <h2 id="about-title" class="text-3xl font-serif font-bold text-gold-500 mb-6 tracking-wide">VibeVault Nedir?</h2>
-            
+
+            <h2 id="about-title" class="text-3xl font-serif font-bold text-gold-500 mb-6 tracking-wide">VibeVault Nedir?
+            </h2>
+
             <div class="space-y-6 text-paper-100 text-lg font-light leading-relaxed">
                 <p id="about-p1">
-                    VibeVault, basit bir kategori eşleştirme algoritması değildir. Tükettiğiniz içeriklerin arka planındaki "hissi" (vibe), ana temaları ve psikolojik altyapıyı analiz eden yapay zeka destekli bir kürasyon motorudur.
+                    VibeVault, basit bir kategori eşleştirme algoritması değildir. Tükettiğiniz içeriklerin arka
+                    planındaki "hissi" (vibe), ana temaları ve psikolojik altyapıyı analiz eden yapay zeka destekli bir
+                    kürasyon motorudur.
                 </p>
                 <div class="border-l-2 border-gold-500/50 pl-4 py-1 my-6 text-paper-200">
-                    <p id="about-p2" class="font-sans font-medium text-gold-500/80 uppercase text-sm tracking-widest mb-2">Nasıl Çalışır?</p>
+                    <p id="about-p2"
+                        class="font-sans font-medium text-gold-500/80 uppercase text-sm tracking-widest mb-2">Nasıl
+                        Çalışır?</p>
                     <p id="about-p3">
-                        Bir film, dizi, kitap veya oyun adı girdiğinizde, sistem bu eserin kültürel DNA'sını ve trope'larını (yolculuk, yalnızlık, isyan, kara mizah vb.) okur. Ardından sizi aynı atmosfere ve benzer estetiğe götürecek, farklı medya türlerinden eserlerle eşleştirir.
+                        Bir film, dizi, kitap veya oyun adı girdiğinizde, sistem bu eserin kültürel DNA'sını ve
+                        trope'larını (yolculuk, yalnızlık, isyan, kara mizah vb.) okur. Ardından sizi aynı atmosfere ve
+                        benzer estetiğe götürecek, farklı medya türlerinden eserlerle eşleştirir.
                     </p>
                 </div>
                 <p id="about-p4" class="font-medium text-gold-500 text-center text-xl font-quote italic mt-8">
@@ -340,21 +502,34 @@
     </main>
 
     <!-- API Key Settings Modal -->
-    <div id="settings-modal" class="fixed inset-0 bg-wood-900/80 backdrop-blur-sm flex items-center justify-center hidden z-[100] p-4">
-        <div class="bg-wood-800 border border-wood-700 rounded-xl p-6 w-full max-w-md shadow-2xl relative text-paper-100">
-            <button onclick="toggleSettingsModal(false)" class="absolute top-4 right-4 text-paper-200 hover:text-gold-500 transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    <div id="settings-modal"
+        class="fixed inset-0 bg-wood-900/80 backdrop-blur-sm flex items-center justify-center hidden z-[100] p-4">
+        <div
+            class="bg-wood-800 border border-wood-700 rounded-xl p-6 w-full max-w-md shadow-2xl relative text-paper-100">
+            <button onclick="toggleSettingsModal(false)"
+                class="absolute top-4 right-4 text-paper-200 hover:text-gold-500 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
             </button>
             <h3 id="settings-title" class="text-xl font-serif font-bold text-gold-500 mb-4">Gemini API Ayarları</h3>
-            <p id="settings-desc" class="text-sm text-paper-200/80 mb-4 font-light leading-relaxed">Arama yapabilmek için kendi Gemini API anahtarınızı girmeniz gerekmektedir. Anahtarınız tarayıcınızda (localStorage) güvenle saklanır.</p>
-            <input type="password" id="api-key-input" class="w-full bg-wood-900 border border-wood-700 rounded p-3 text-paper-100 placeholder-paper-200/30 outline-none text-sm font-mono mb-4" placeholder="AIzaSy...">
+            <p id="settings-desc" class="text-sm text-paper-200/80 mb-4 font-light leading-relaxed">Arama yapabilmek
+                için kendi Gemini API anahtarınızı girmeniz gerekmektedir. Anahtarınız tarayıcınızda (localStorage)
+                güvenle saklanır.</p>
+            <input type="password" id="api-key-input"
+                class="w-full bg-wood-900 border border-wood-700 rounded p-3 text-paper-100 placeholder-paper-200/30 outline-none text-sm font-mono mb-4"
+                placeholder="AIzaSy...">
             <div class="flex justify-end gap-3">
-                <button onclick="saveApiKey()" id="settings-save-btn" class="bg-gold-600 hover:bg-gold-500 text-wood-900 font-bold py-2 px-4 rounded text-sm transition-colors">Kaydet</button>
+                <button onclick="saveApiKey()" id="settings-save-btn"
+                    class="bg-gold-600 hover:bg-gold-500 text-wood-900 font-bold py-2 px-4 rounded text-sm transition-colors">Kaydet</button>
             </div>
         </div>
     </div>
 
-    <footer id="footer-text" class="w-full p-4 text-center text-wood-700/60 text-sm mt-auto backdrop-blur-sm bg-wood-900/30">
+    <footer id="footer-text"
+        class="w-full p-4 text-center text-wood-700/60 text-sm mt-auto backdrop-blur-sm bg-wood-900/30">
         VibeVault © 2026 - Yapay Zeka Destekli Kürasyon by Master Unagi
     </footer>
 
@@ -362,77 +537,77 @@
         // --- UYGULAMA VERİLERİ VE DURUMU ---
         const quotesData = [
             {
-                "tr": {"alinti": "Zaman bir yanılsamadır. Hele öğle vakti iki misli yanılsamadır.", "yazar": "Douglas Adams", "kitap": "Otostopçunun Galaksi Rehberi"},
-                "en": {"alinti": "Time is an illusion. Lunchtime doubly so.", "yazar": "Douglas Adams", "kitap": "The Hitchhiker's Guide to the Galaxy"}
+                "tr": { "alinti": "Zaman bir yanılsamadır. Hele öğle vakti iki misli yanılsamadır.", "yazar": "Douglas Adams", "kitap": "Otostopçunun Galaksi Rehberi" },
+                "en": { "alinti": "Time is an illusion. Lunchtime doubly so.", "yazar": "Douglas Adams", "kitap": "The Hitchhiker's Guide to the Galaxy" }
             },
             {
-                "tr": {"alinti": "Bütün mutlu aileler birbirine benzer; her mutsuz ailenin kendine özgü bir mutsuzluğu vardır.", "yazar": "Lev Tolstoy", "kitap": "Anna Karenina"},
-                "en": {"alinti": "All happy families are alike; each unhappy family is unhappy in its own way.", "yazar": "Leo Tolstoy", "kitap": "Anna Karenina"}
+                "tr": { "alinti": "Bütün mutlu aileler birbirine benzer; her mutsuz ailenin kendine özgü bir mutsuzluğu vardır.", "yazar": "Lev Tolstoy", "kitap": "Anna Karenina" },
+                "en": { "alinti": "All happy families are alike; each unhappy family is unhappy in its own way.", "yazar": "Leo Tolstoy", "kitap": "Anna Karenina" }
             },
             {
-                "tr": {"alinti": "İnsan sadece yüreğiyle baktığı zaman doğruyu görebilir. Gerçeğin mayası gözle görülmez.", "yazar": "Antoine de Saint-Exupéry", "kitap": "Küçük Prens"},
-                "en": {"alinti": "It is only with the heart that one can see rightly; what is essential is invisible to the eye.", "yazar": "Antoine de Saint-Exupéry", "kitap": "The Little Prince"}
+                "tr": { "alinti": "İnsan sadece yüreğiyle baktığı zaman doğruyu görebilir. Gerçeğin mayası gözle görülmez.", "yazar": "Antoine de Saint-Exupéry", "kitap": "Küçük Prens" },
+                "en": { "alinti": "It is only with the heart that one can see rightly; what is essential is invisible to the eye.", "yazar": "Antoine de Saint-Exupéry", "kitap": "The Little Prince" }
             },
             {
-                "tr": {"alinti": "Bir kitap, içimizdeki donmuş denize inen bir baltadır.", "yazar": "Franz Kafka", "kitap": "Milena'ya Mektuplar"},
-                "en": {"alinti": "A book must be the axe for the frozen sea within us.", "yazar": "Franz Kafka", "kitap": "Letters to Milena"}
+                "tr": { "alinti": "Bir kitap, içimizdeki donmuş denize inen bir baltadır.", "yazar": "Franz Kafka", "kitap": "Milena'ya Mektuplar" },
+                "en": { "alinti": "A book must be the axe for the frozen sea within us.", "yazar": "Franz Kafka", "kitap": "Letters to Milena" }
             },
             {
-                "tr": {"alinti": "Yalnızca kaybedecek hiçbir şeyimiz kalmadığında, her şeyi yapmakta özgür oluruz.", "yazar": "Chuck Palahniuk", "kitap": "Dövüş Kulübü"},
-                "en": {"alinti": "It's only after we've lost everything that we're free to do anything.", "yazar": "Chuck Palahniuk", "kitap": "Fight Club"}
+                "tr": { "alinti": "Yalnızca kaybedecek hiçbir şeyimiz kalmadığında, her şeyi yapmakta özgür oluruz.", "yazar": "Chuck Palahniuk", "kitap": "Dövüş Kulübü" },
+                "en": { "alinti": "It's only after we've lost everything that we're free to do anything.", "yazar": "Chuck Palahniuk", "kitap": "Fight Club" }
             },
             {
-                "tr": {"alinti": "İnsanlar bir şeyleri anlamadıkları zaman onlara isim takarlar.", "yazar": "Ursula K. Le Guin", "kitap": "Yerdeniz Büyücüsü"},
-                "en": {"alinti": "When people don't understand things, they name them.", "yazar": "Ursula K. Le Guin", "kitap": "A Wizard of Earthsea"}
+                "tr": { "alinti": "İnsanlar bir şeyleri anlamadıkları zaman onlara isim takarlar.", "yazar": "Ursula K. Le Guin", "kitap": "Yerdeniz Büyücüsü" },
+                "en": { "alinti": "When people don't understand things, they name them.", "yazar": "Ursula K. Le Guin", "kitap": "A Wizard of Earthsea" }
             },
             {
-                "tr": {"alinti": "Gizemler çözülmek için değil, yaşanmak içindir.", "yazar": "Frank Herbert", "kitap": "Dune"},
-                "en": {"alinti": "Mysteries are not meant to be solved, but to be experienced.", "yazar": "Frank Herbert", "kitap": "Dune"}
+                "tr": { "alinti": "Gizemler çözülmek için değil, yaşanmak içindir.", "yazar": "Frank Herbert", "kitap": "Dune" },
+                "en": { "alinti": "Mysteries are not meant to be solved, but to be experienced.", "yazar": "Frank Herbert", "kitap": "Dune" }
             },
             {
-                "tr": {"alinti": "Korku, aklı öldüren şeydir. Korku, toptan yok oluşu getiren küçük ölümdür.", "yazar": "Frank Herbert", "kitap": "Dune"},
-                "en": {"alinti": "I must not fear. Fear is the mind-killer. Fear is the little-death that brings total obliteration.", "yazar": "Frank Herbert", "kitap": "Dune"}
+                "tr": { "alinti": "Korku, aklı öldüren şeydir. Korku, toptan yok oluşu getiren küçük ölümdür.", "yazar": "Frank Herbert", "kitap": "Dune" },
+                "en": { "alinti": "I must not fear. Fear is the mind-killer. Fear is the little-death that brings total obliteration.", "yazar": "Frank Herbert", "kitap": "Dune" }
             },
             {
-                "tr": {"alinti": "Yap ya da yapma. Denemek diye bir şey yoktur.", "yazar": "Yoda", "kitap": "Star Wars: İmparator"},
-                "en": {"alinti": "Do or do not. There is no try.", "yazar": "Yoda", "kitap": "Star Wars: The Empire Strikes Back"}
+                "tr": { "alinti": "Yap ya da yapma. Denemek diye bir şey yoktur.", "yazar": "Yoda", "kitap": "Star Wars: İmparator" },
+                "en": { "alinti": "Do or do not. There is no try.", "yazar": "Yoda", "kitap": "Star Wars: The Empire Strikes Back" }
             },
             {
-                "tr": {"alinti": "Güç, bir Jedi'a gücünü veren şeydir. Tüm canlılar tarafından yaratılan bir enerji alanıdır.", "yazar": "Obi-Wan Kenobi", "kitap": "Star Wars: Yeni Bir Umut"},
-                "en": {"alinti": "The Force is what gives a Jedi his power. It's an energy field created by all living things.", "yazar": "Obi-Wan Kenobi", "kitap": "Star Wars: A New Hope"}
+                "tr": { "alinti": "Güç, bir Jedi'a gücünü veren şeydir. Tüm canlılar tarafından yaratılan bir enerji alanıdır.", "yazar": "Obi-Wan Kenobi", "kitap": "Star Wars: Yeni Bir Umut" },
+                "en": { "alinti": "The Force is what gives a Jedi his power. It's an energy field created by all living things.", "yazar": "Obi-Wan Kenobi", "kitap": "Star Wars: A New Hope" }
             },
             {
-                "tr": {"alinti": "Panik Yapmayın.", "yazar": "Douglas Adams", "kitap": "Otostopçunun Galaksi Rehberi"},
-                "en": {"alinti": "Don't Panic.", "yazar": "Douglas Adams", "kitap": "The Hitchhiker's Guide to the Galaxy"}
+                "tr": { "alinti": "Panik Yapmayın.", "yazar": "Douglas Adams", "kitap": "Otostopçunun Galaksi Rehberi" },
+                "en": { "alinti": "Don't Panic.", "yazar": "Douglas Adams", "kitap": "The Hitchhiker's Guide to the Galaxy" }
             },
             {
-                "tr": {"alinti": "Hayatı anlamak zorunda değilsin, sadece yaşamak zorundasın.", "yazar": "Matt Haig", "kitap": "Gece Yarısı Kütüphanesi"},
-                "en": {"alinti": "You don't have to understand life, you just have to live it.", "yazar": "Matt Haig", "kitap": "The Midnight Library"}
+                "tr": { "alinti": "Hayatı anlamak zorunda değilsin, sadece yaşamak zorundasın.", "yazar": "Matt Haig", "kitap": "Gece Yarısı Kütüphanesi" },
+                "en": { "alinti": "You don't have to understand life, you just have to live it.", "yazar": "Matt Haig", "kitap": "The Midnight Library" }
             },
             {
-                "tr": {"alinti": "Evin güzelliği ölçülemez, içindeki iyilik ise sonsuzdur.", "yazar": "Susanna Clarke", "kitap": "Piranesi"},
-                "en": {"alinti": "The Beauty of the House is immeasurable; its Kindness infinite.", "yazar": "Susanna Clarke", "kitap": "Piranesi"}
+                "tr": { "alinti": "Evin güzelliği ölçülemez, içindeki iyilik ise sonsuzdur.", "yazar": "Susanna Clarke", "kitap": "Piranesi" },
+                "en": { "alinti": "The Beauty of the House is immeasurable; its Kindness infinite.", "yazar": "Susanna Clarke", "kitap": "Piranesi" }
             },
             {
-                "tr": {"alinti": "İnsan kalbi tıpkı bir ev gibidir; içinde hiç bilmediğimiz odalar bulunur.", "yazar": "Kazuo Ishiguro", "kitap": "Klara ile Güneş"},
-                "en": {"alinti": "The human heart is like a house; it has rooms inside we don't even know exist.", "yazar": "Kazuo Ishiguro", "kitap": "Klara and the Sun"}
+                "tr": { "alinti": "İnsan kalbi tıpkı bir ev gibidir; içinde hiç bilmediğimiz odalar bulunur.", "yazar": "Kazuo Ishiguro", "kitap": "Klara ile Güneş" },
+                "en": { "alinti": "The human heart is like a house; it has rooms inside we don't even know exist.", "yazar": "Kazuo Ishiguro", "kitap": "Klara and the Sun" }
             },
             {
-                "tr": {"alinti": "İki bilinmeyenli bir denklemde, her zaman kendinize güvenmelisiniz.", "yazar": "Andy Weir", "kitap": "Kurtuluş Projesi"},
-                "en": {"alinti": "In a situation with two unknowns, you always have to trust yourself.", "yazar": "Andy Weir", "kitap": "Project Hail Mary"}
+                "tr": { "alinti": "İki bilinmeyenli bir denklemde, her zaman kendinize güvenmelisiniz.", "yazar": "Andy Weir", "kitap": "Kurtuluş Projesi" },
+                "en": { "alinti": "In a situation with two unknowns, you always have to trust yourself.", "yazar": "Andy Weir", "kitap": "Project Hail Mary" }
             },
             {
-                "tr": {"alinti": "Oyunda olmak, hayatta olmanın en saf halidir.", "yazar": "Gabrielle Zevin", "kitap": "Yarın, ve Yarın, ve Yarın"},
-                "en": {"alinti": "To be in the game is to be in the purest state of being alive.", "yazar": "Gabrielle Zevin", "kitap": "Tomorrow, and Tomorrow, and Tomorrow"}
+                "tr": { "alinti": "Oyunda olmak, hayatta olmanın en saf halidir.", "yazar": "Gabrielle Zevin", "kitap": "Yarın, ve Yarın, ve Yarın" },
+                "en": { "alinti": "To be in the game is to be in the purest state of being alive.", "yazar": "Gabrielle Zevin", "kitap": "Tomorrow, and Tomorrow, and Tomorrow" }
             },
             {
-                "tr": {"alinti": "Bizler, kelimelerden inşa edilmiş kalelerde yaşayan mahkumlarız.", "yazar": "Neil Gaiman", "kitap": "Amerikan Tanrıları"},
-                "en": {"alinti": "We are prisoners living in castles built of words.", "yazar": "Neil Gaiman", "kitap": "American Gods"}
+                "tr": { "alinti": "Bizler, kelimelerden inşa edilmiş kalelerde yaşayan mahkumlarız.", "yazar": "Neil Gaiman", "kitap": "Amerikan Tanrıları" },
+                "en": { "alinti": "We are prisoners living in castles built of words.", "yazar": "Neil Gaiman", "kitap": "American Gods" }
             }
         ];
 
         let isEnglish = localStorage.getItem('vibeVaultLang') === 'en';
-        
+
         // VibeMatch'ten VibeVault'a Veri Göçü (Data Migration)
         let favorites = JSON.parse(localStorage.getItem('vibeVaultFavs'));
         if (!favorites) {
@@ -449,7 +624,7 @@
                 localStorage.removeItem('vibeMatchApiKey');
             }
         }
-        let currentBooks = []; 
+        let currentBooks = [];
         let loadingInterval;
         let selectedCategories = [];
         let activeResultsFilters = ['book', 'movie', 'tv', 'game', 'boardgame'];
@@ -500,7 +675,7 @@
             cards.forEach(card => {
                 const cat = card.getAttribute('data-category');
                 const matches = activeResultsFilters.includes(cat);
-                    
+
                 if (matches) {
                     card.classList.remove('hidden');
                     visibleCount++;
@@ -508,7 +683,7 @@
                     card.classList.add('hidden');
                 }
             });
-            
+
             let emptyMsg = document.getElementById('results-empty-message');
             if (visibleCount === 0) {
                 if (!emptyMsg) {
@@ -575,7 +750,7 @@
                     .then(reg => console.log('Service Worker registered', reg))
                     .catch(err => console.error('Service Worker registration failed', err));
             }
-            
+
             // Enter tuşu ile arama
             if (searchInput) {
                 searchInput.addEventListener('keypress', function (e) {
@@ -594,16 +769,16 @@
             const quoteObj = quotesData[randomIndex];
             const quote = isEnglish ? quoteObj.en : quoteObj.tr;
             document.getElementById('quote-text').innerText = `"${quote.alinti}"`;
-            
+
             // Yazar adlarında İngilizce/Türkçe 'i'/'I' ayrımı için filtre
             const trAuthors = ["Sabahattin Ali", "Ahmet Hamdi Tanpınar"];
-            
+
             if (trAuthors.includes(quote.yazar)) {
                 document.getElementById('quote-author').innerText = quote.yazar.toLocaleUpperCase('tr-TR');
             } else {
                 document.getElementById('quote-author').innerText = quote.yazar.replace(/i/g, 'I').toUpperCase();
             }
-            
+
             // Kitap isimleri Türkçe karakter içerdiği için doğrudan Türkçe kurallarına göre büyütüyoruz
             document.getElementById('quote-book').innerText = quote.kitap.toLocaleUpperCase('tr-TR');
         }
@@ -612,7 +787,7 @@
             const knob = document.getElementById('lang-knob');
             const trSpan = document.getElementById('lang-tr');
             const enSpan = document.getElementById('lang-en');
-            
+
             // About metinleri
             const aboutTitle = document.getElementById('about-title');
             const aboutP1 = document.getElementById('about-p1');
@@ -627,7 +802,7 @@
             const settingsSaveBtn = document.getElementById('settings-save-btn');
             const navFavBtn = document.getElementById('nav-fav-btn');
             const navSettingsBtn = document.getElementById('nav-settings-btn');
-            
+
             // Home & Results & Footer & Back Button & Search
             const homeTitle = document.getElementById('home-title');
             const homeSubtitle = document.getElementById('home-subtitle');
@@ -640,7 +815,7 @@
                 if (trSpan) trSpan.classList.remove('text-gold-500');
                 if (searchInput) searchInput.placeholder = "E.g: The Matrix, Dune, Norse Mythology, Star Wars...";
                 if (btnText) btnText.innerText = "Search";
-                
+
                 // Kategori Seçim Etiketleri
                 const catLabel = document.getElementById('category-select-label');
                 if (catLabel) catLabel.innerText = "Recommendation Categories";
@@ -668,20 +843,20 @@
                 if (resLabelGame) resLabelGame.innerText = "Video Game";
                 const resLabelBoardgame = document.getElementById('res-label-boardgame');
                 if (resLabelBoardgame) resLabelBoardgame.innerText = "Board Game";
-                
+
                 if (homeTitle) homeTitle.innerText = "Discover Similar Worlds";
                 if (homeSubtitle) homeSubtitle.innerText = "Enter a book, movie, show, or game you love, and we'll pull new adventures sharing the exact same themes, style, and atmosphere from the VibeVault archives.";
                 if (backBtnText) backBtnText.innerText = "New Search";
                 const loadMoreText = document.getElementById('load-more-text');
                 if (loadMoreText) loadMoreText.innerText = "Load More Recommendations";
                 if (footerText) footerText.innerText = "VibeVault © 2026 - AI-Powered Curation by Master Unagi";
- 
+
                 if (aboutTitle) aboutTitle.innerText = "What is VibeVault?";
                 if (aboutP1) aboutP1.innerText = "VibeVault is not a simple genre-matching algorithm. It is an AI-powered curation engine that analyzes the underlying 'vibe', core themes, and psychological depth of the content you consume.";
                 if (aboutP2) aboutP2.innerText = "HOW IT WORKS?";
                 if (aboutP3) aboutP3.innerText = "When you enter a movie, show, book, or game, the system reads the cultural DNA and tropes (e.g., hero's journey, isolation, dark humor) of that piece. It then matches you with works from different media types that will take you to the same atmosphere and similar aesthetic.";
                 if (aboutP4) aboutP4.innerText = "\"It goes beyond genres, it matches feelings.\"";
- 
+
                 if (settingsTitle) settingsTitle.innerText = "Gemini API Settings";
                 if (settingsDesc) settingsDesc.innerText = "You need to enter your Gemini API key to make searches. Your key is stored securely in your browser (localStorage).";
                 if (apiKeyInput) apiKeyInput.placeholder = "API Key (AIzaSy...)";
@@ -694,7 +869,7 @@
                 if (enSpan) enSpan.classList.remove('text-gold-500');
                 if (searchInput) searchInput.placeholder = "Örn: The Matrix, Dune, İskandinav Mitolojisi, Star Wars...";
                 if (btnText) btnText.innerText = "Ara";
-                
+
                 // Kategori Seçim Etiketleri
                 const catLabel = document.getElementById('category-select-label');
                 if (catLabel) catLabel.innerText = "Öneri Kategorileri";
@@ -722,20 +897,20 @@
                 if (resLabelGame) resLabelGame.innerText = "Video Oyunu";
                 const resLabelBoardgame = document.getElementById('res-label-boardgame');
                 if (resLabelBoardgame) resLabelBoardgame.innerText = "Kutu Oyunu";
-                
+
                 if (homeTitle) homeTitle.innerText = "Benzer Dünyaları Keşfe Çık";
                 if (homeSubtitle) homeSubtitle.innerText = "Tadı damağında kalan bir kitabı, filmi, diziyi veya oyunu yaz; onunla benzer temaları, dünyaları ve atmosferi paylaşan yeni maceraları VibeVault arşivlerinden senin için çıkaralım.";
                 if (backBtnText) backBtnText.innerText = "Yeni Arama";
                 const loadMoreText = document.getElementById('load-more-text');
                 if (loadMoreText) loadMoreText.innerText = "Daha Fazla Öneri Yükle";
                 if (footerText) footerText.innerText = "VibeVault © 2026 - Yapay Zeka Destekli Kürasyon by Master Unagi";
-                
+
                 if (aboutTitle) aboutTitle.innerText = "VibeVault Nedir?";
                 if (aboutP1) aboutP1.innerText = "VibeVault, basit bir kategori eşleştirme algoritması değildir. Tükettiğiniz içeriklerin arka planındaki 'hissi' (vibe), ana temaları ve psikolojik altyapıyı analiz eden yapay zeka destekli bir kürasyon motorudur.";
                 if (aboutP2) aboutP2.innerText = "NASIL ÇALIŞIR?";
                 if (aboutP3) aboutP3.innerText = "Bir film, dizi, kitap veya oyun adı girdiğinizde, sistem bu eserin kültürel DNA'sını ve trope'larını (yolculuk, yalnızlık, isyan, kara mizah vb.) okur. Ardından sizi aynı atmosfere ve benzer estetiğe götürecek, farklı medya türlerinden eserlerle eşleştirir.";
                 if (aboutP4) aboutP4.innerText = "\"Türlerin ötesine geçer, hisleri eşleştirir.\"";
- 
+
                 if (settingsTitle) settingsTitle.innerText = "Gemini API Ayarları";
                 if (settingsDesc) settingsDesc.innerText = "Arama yapabilmek için kendi Gemini API anahtarınızı girmeniz gerekmektedir. Anahtarınız tarayıcınızda (localStorage) güvenle saklanır.";
                 if (apiKeyInput) apiKeyInput.placeholder = "API Anahtarı (AIzaSy...)";
@@ -770,7 +945,7 @@
             resultsView.classList.add('hidden');
             aboutView.classList.add('hidden');
             homeView.classList.remove('hidden');
-            setRandomQuote(); 
+            setRandomQuote();
         }
 
         function showResults(title) {
@@ -779,7 +954,7 @@
             resultsView.classList.remove('hidden');
             resultsTitle.innerText = title;
             errorMessage.classList.add('hidden');
-            
+
             const loadMoreContainer = document.getElementById('load-more-container');
             if (loadMoreContainer) {
                 if (title === "My Favorites" || title === "Favori Listem" || !currentBooks || currentBooks.length === 0) {
@@ -825,15 +1000,15 @@
                 let cache = cacheRaw ? JSON.parse(cacheRaw) : {};
                 const sortedCats = [...(categories || [])].sort().join(',');
                 const cacheId = `${query.trim().toLowerCase()}-${sortedCats}-${isEnglish ? 'en' : 'tr'}`;
-                
+
                 cache[cacheId] = results;
-                
+
                 // En eski aramayı silerek yer aç (LRU)
                 const keys = Object.keys(cache);
                 if (keys.length > MAX_CACHE_SIZE) {
                     delete cache[keys[0]];
                 }
-                
+
                 localStorage.setItem(CACHE_KEY, JSON.stringify(cache));
             } catch (e) {
                 console.error('Cache write error:', e);
@@ -846,19 +1021,19 @@
             if (!query) return;
 
             const searchCats = selectedCategories.length > 0 ? selectedCategories : ['book', 'movie', 'tv', 'game', 'boardgame'];
-            
+
             // Önbellek kontrolü (Quota tasarrufu sağlar)
             const cachedBooks = getCachedResults(query, isEnglish, searchCats);
             if (cachedBooks) {
                 console.log('Serving from local cache:', query);
                 currentBooks = cachedBooks;
-                
+
                 // Sonuç filtresini arama esnasındaki kategorilerle eşle
                 activeResultsFilters = [...searchCats];
                 ['book', 'movie', 'tv', 'game', 'boardgame'].forEach(cat => {
                     updateChipStyles(`res-chip-${cat}`, activeResultsFilters.includes(cat));
                 });
-                
+
                 renderBooks(cachedBooks);
                 showResults(isEnglish ? `Recommendations for "${query}"` : `"${query}" için Öneriler`);
                 return;
@@ -871,7 +1046,7 @@
             const loadingTextsEN = ["Dusting off the shelves...", "Scanning the archives...", "Finding the right vibe...", "Delving into the library..."];
             const activeTexts = isEnglish ? loadingTextsEN : loadingTextsTR;
             let textIdx = 0;
-            
+
             const loadingTextSpan = document.getElementById('loading-text');
             loadingTextSpan.innerText = activeTexts[textIdx];
             loadingTextSpan.classList.remove('hidden');
@@ -888,7 +1063,7 @@
 
             try {
                 let books;
-                
+
                 const isCustomKey = apiKey && apiKey !== "";
                 const isDirectHtmlFile = window.location.protocol === 'file:';
                 const useDirectCall = isCustomKey || isDirectHtmlFile;
@@ -903,7 +1078,7 @@
                         searchBtn.disabled = false;
                         return;
                     }
-                    
+
                     const backendCategories = [];
                     if (searchCats.includes('book')) backendCategories.push('book');
                     if (searchCats.includes('movie')) backendCategories.push('movie');
@@ -939,8 +1114,8 @@
                                     properties: {
                                         title: { type: "STRING", description: "Eserin adı" },
                                         author: { type: "STRING", description: "Yazar / Yönetmen / Geliştirici / Tasarımcı adı" },
-                                        category: { 
-                                            type: "STRING", 
+                                        category: {
+                                            type: "STRING",
                                             enum: backendCategories,
                                             description: `Kategori: Sadece şu değerlerden biri olmalıdır: ${allowedCatsStr}`
                                         },
@@ -962,7 +1137,7 @@
                     });
 
                     const data = await response.json();
-                    
+
                     if (data.error) {
                         throw new Error(data.error.message || "API Hatası");
                     }
@@ -1000,15 +1175,15 @@
 
                     books = await response.json();
                 }
-                
+
                 // Puanları büyükten küçüğe sıralama işlemi
                 books.sort((a, b) => b.matchScore - a.matchScore);
 
                 // Sonuçları önbelleğe kaydet
                 setCachedResults(query, isEnglish, searchCats, books);
 
-                currentBooks = books; 
-                
+                currentBooks = books;
+
                 // Sonuç filtresini arama esnasındaki kategorilerle eşle
                 activeResultsFilters = [...selectedCategories];
                 ['book', 'movie', 'tv', 'game', 'boardgame'].forEach(cat => {
@@ -1105,8 +1280,8 @@
                                     properties: {
                                         title: { type: "STRING", description: "Eserin adı" },
                                         author: { type: "STRING", description: "Yazar / Yönetmen / Geliştirici / Tasarımcı adı" },
-                                        category: { 
-                                            type: "STRING", 
+                                        category: {
+                                            type: "STRING",
                                             enum: backendCategories,
                                             description: `Kategori: Sadece şu değerlerden biri olmalıdır: ${allowedCatsStr}`
                                         },
@@ -1168,24 +1343,24 @@
         // --- ARAYÜZ OLUŞTURMA VE FAVORİLER ---
         function getCategoryDetails(category) {
             const categories = {
-                'book': { 
-                    label: isEnglish ? 'BOOK' : 'KİTAP', 
+                'book': {
+                    label: isEnglish ? 'BOOK' : 'KİTAP',
                     icon: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>'
                 },
-                'movie': { 
-                    label: isEnglish ? 'MOVIE' : 'FİLM', 
+                'movie': {
+                    label: isEnglish ? 'MOVIE' : 'FİLM',
                     icon: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/></svg>'
                 },
-                'tv': { 
-                    label: isEnglish ? 'TV SHOW' : 'DİZİ', 
+                'tv': {
+                    label: isEnglish ? 'TV SHOW' : 'DİZİ',
                     icon: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"/><polyline points="17 2 12 7 7 2"/></svg>'
                 },
-                'game': { 
-                    label: isEnglish ? 'VIDEO GAME' : 'VİDEO OYUNU', 
+                'game': {
+                    label: isEnglish ? 'VIDEO GAME' : 'VİDEO OYUNU',
                     icon: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512" fill="currentColor"><path d="M467.51 248.83c-18.4-83.18-45.69-136.24-89.43-149.17A91.5 91.5 0 00352 96c-26.89 0-48.11 16-96 16s-69.15-16-96-16a99.09 99.09 0 00-27.2 3.66C89 112.59 61.94 165.7 43.33 248.83c-19 84.91-15.56 152 21.58 164.88 26 9 49.25-9.61 71.27-37 25-31.2 55.79-40.8 119.82-40.8s93.62 9.6 118.66 40.8c22 27.41 46.11 45.79 71.42 37.16 41.02-14.01 40.44-79.13 21.43-165.04z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/><circle cx="292" cy="224" r="20"/><circle cx="336" cy="268" r="20"/><circle cx="336" cy="180" r="20"/><circle cx="380" cy="224" r="20"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M160 176v96M208 224h-96"/></svg>'
                 },
-                'boardgame': { 
-                    label: isEnglish ? 'BOARD GAME' : 'KUTU OYUNU', 
+                'boardgame': {
+                    label: isEnglish ? 'BOARD GAME' : 'KUTU OYUNU',
                     icon: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2"/><circle cx="8" cy="8" r="1.5"/><circle cx="16" cy="16" r="1.5"/><circle cx="8" cy="16" r="1.5"/><circle cx="16" cy="8" r="1.5"/><circle cx="12" cy="12" r="1.5"/></svg>'
                 }
             };
@@ -1198,7 +1373,7 @@
 
         function renderBooks(books) {
             booksGrid.innerHTML = '';
-            
+
             if (!books || books.length === 0) {
                 booksGrid.innerHTML = `<p class="text-paper-200">Sonuç bulunamadı.</p>`;
                 return;
@@ -1208,12 +1383,12 @@
                 const bookId = slugify(book.title, book.author);
                 const isFav = favorites.some(f => f.id === bookId);
                 const categoryDetails = getCategoryDetails(book.category || 'book');
-                
+
                 const card = document.createElement('div');
                 card.className = "bg-wood-800/80 border border-wood-700 rounded-xl p-6 relative flex flex-col transition-transform duration-300 hover:-translate-y-2 hover:shadow-[0_10px_30px_rgba(0,0,0,0.5)] group";
                 card.setAttribute('onclick', 'toggleQuote(this, event)');
                 card.setAttribute('data-category', book.category || 'book');
-                
+
                 card.innerHTML = `
                     <div class="absolute top-4 right-4 flex items-center gap-3">
                         <button onclick="event.stopPropagation(); shareItem('${bookId}')" 
@@ -1243,8 +1418,8 @@
                         <!-- Vibe Uyum Skoru (Match Score) -->
                         <div class="flex items-center gap-1.5">
                             <span class="flex items-center gap-1 text-gold-500">
-                                <!-- Target/Match Icon -->
-                                <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+                                <!-- Gem/Diamond Icon -->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 12L2 9z"/><path d="M11 3 8 9l4 12"/><path d="M13 3l3 6-4 12"/><path d="M2 9h20"/></svg>
                                 <span class="text-gold-500/80 font-bold">${isEnglish ? 'Vibe Match Score' : 'Vibe Uyum Skoru'}:</span>
                                 <span class="text-paper-200 font-bold">${book.matchScore}/10</span>
                             </span>
@@ -1252,9 +1427,9 @@
                             <div class="relative group/vibe-info inline-block cursor-help flex items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-paper-200/40 hover:text-gold-500 transition-colors"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
                                 <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-52 p-2 bg-wood-900 border border-wood-700 text-[10px] text-paper-200 rounded shadow-lg opacity-0 group-hover/vibe-info:opacity-100 transition-opacity duration-300 pointer-events-none z-10 text-center leading-normal">
-                                    ${isEnglish 
-                                        ? 'Vibe Match Score is rated by AI based on story, plot, atmosphere, and style factors.' 
-                                        : 'Hikaye, olay örgüsü, atmosfer, üslup faktörleri baz alınarak Vibe Uyum Skoru yapay zeka tarafından puanlanmıştır.'}
+                                    ${isEnglish
+                        ? 'Vibe Match Score is rated by AI based on story, plot, atmosphere, and style factors.'
+                        : 'Hikaye, olay örgüsü, atmosfer, üslup faktörleri baz alınarak Vibe Uyum Skoru yapay zeka tarafından puanlanmıştır.'}
                                 </div>
                             </div>
                         </div>
@@ -1272,9 +1447,9 @@
                             <div class="relative group/info inline-block cursor-help flex items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-paper-200/40 hover:text-gold-500 transition-colors"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
                                 <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 p-2 bg-wood-900 border border-wood-700 text-[10px] text-paper-200 rounded shadow-lg opacity-0 group-hover/info:opacity-100 transition-opacity duration-300 pointer-events-none z-10 text-center leading-normal">
-                                    ${isEnglish 
-                                        ? 'This rating is generated by AI based on average sentiments from forums and blogs.' 
-                                        : 'Bu derecelendirme yapay zeka tarafından forum ve blog ortamlardaki yorumlara göre ortalama bir puanlama olarak verilmiştir.'}
+                                    ${isEnglish
+                        ? 'This rating is generated by AI based on average sentiments from forums and blogs.'
+                        : 'Bu derecelendirme yapay zeka tarafından forum ve blog ortamlardaki yorumlara göre ortalama bir puanlama olarak verilmiştir.'}
                                 </div>
                             </div>
                         </div>
@@ -1337,20 +1512,20 @@
 
         function toggleFav(id, btnElement) {
             const index = favorites.findIndex(f => f.id === id);
-            
+
             if (index > -1) {
-                favorites.splice(index, 1); 
+                favorites.splice(index, 1);
             } else {
                 const bookToAdd = currentBooks.find(b => slugify(b.title, b.author) === id);
                 if (bookToAdd) {
-                    const newFav = {...bookToAdd, id: id};
-                    favorites.push(newFav); 
+                    const newFav = { ...bookToAdd, id: id };
+                    favorites.push(newFav);
                 }
             }
-            
+
             localStorage.setItem('vibeVaultFavs', JSON.stringify(favorites));
             updateFavCount();
-            
+
             if (resultsTitle.innerText === "Favori Listem" || resultsTitle.innerText === "My Favorites") {
                 showFavorites();
                 // Favoriler listesindeyken alt kısım arama butonunu gizle
@@ -1404,10 +1579,10 @@
 
             const catLabel = getCategoryDetails(item.category).label;
             const query = resultsTitle.innerText.replace(' için Öneriler', '').replace(' için Recommendations', '').replace(/"/g, '');
-            
+
             const siteUrl = window.location.protocol.startsWith('http') ? window.location.origin : 'https://vibevault.vercel.app';
             const shareTitle = `VibeVault: ${item.title}`;
-            let shareText = isEnglish 
+            let shareText = isEnglish
                 ? `Check out this match for the vibe of "${query}" I found on VibeVault:\n\n${item.title} by ${item.author}\nVibe Match Score: ${item.matchScore}/10\n\nWhy: ${item.reason}\n\nIf you want to find worlds similar to what you love: ${siteUrl}`
                 : `VibeVault'ta "${query}" "vibe'ına" uygun bulduğuma bak:\n\n${item.title} - ${item.author}\nVibe Uyum Skoru: ${item.matchScore}/10\n\nNeden Önerildi: ${item.reason}\n\nSen de aradığına benzer dünyalar bulmak istiyorsan: ${siteUrl}`;
 
@@ -1445,4 +1620,5 @@
 
     </script>
 </body>
+
 </html>
