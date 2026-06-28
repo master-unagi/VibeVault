@@ -73,11 +73,10 @@ Yanıtın kesinlikle belirtilen JSON şemasına uymalıdır. Goodreads/IMDB/Meta
               },
               reason: { type: "STRING", description: "Neden önerildi? Hangi temalar ve vibe eşleşti? Kısa bir açıklama." },
               rating: { type: "NUMBER", description: "Değerlendirme puanı (Örn: 8.5 veya 4.15)" },
-              reviews: { type: "STRING", description: "Değerlendirme sayısı (Örn: 15K veya 2M)" },
               matchScore: { type: "NUMBER", description: "Eşleşme oranı, 10 üzerinden (Örn: 9.2)" },
               quote: { type: "STRING", description: "Eserden ikonik, kısa bir alıntı veya replik" }
             },
-            required: ["title", "author", "category", "reason", "rating", "reviews", "matchScore", "quote"]
+            required: ["title", "author", "category", "reason", "rating", "matchScore", "quote"]
           }
         }
       }
