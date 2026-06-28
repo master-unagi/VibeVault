@@ -1058,7 +1058,7 @@
 
             const searchCats = selectedCategories.length > 0 ? selectedCategories : ['book', 'movie', 'tv', 'game', 'boardgame'];
             const excludedTitles = currentBooks.map(b => b.title);
-            const excludeInstructions = excludedTitles.length > 0 ? `\nŞu eserleri kesinlikle listeye dahil etme, bunlar zaten önerildi: [${excludedTitles.map(t => `"${t}"`).join(', ')}]` : '';
+            const excludeInstructions = excludedTitles.length > 0 ? '\nŞu eserleri kesinlikle listeye dahil etme, bunlar zaten önerildi: [' + excludedTitles.map(t => '"' + t.replace(/"/g, '') + '"').join(', ') + ']' : '';
 
             try {
                 let moreBooks = [];
@@ -1074,7 +1074,7 @@
                 if (searchCats.includes('boardgame')) backendCategories.push('boardgame');
                 const allowedCatsStr = backendCategories.map(c => `'${c}'`).join(', ');
 
-                const systemPrompt = `Sen edebi ve kültürel kürasyon yapan uzman bir stratejistsin. Kullanıcının verdiği filme, diziye, oyuna veya müziğe bakarak sadece "tür" olarak değil; "Ana Tema (Core Tropes)" ve "Üslup/Atmosfer (Vibe & Tone)" açısından benzer hisler uyandıran en az 5, en fazla 10 adet içerik önermelisin.
+                const systemPrompt = `Sen edebi ve kültürel kürasyon yapan uzman bir stratejistsin. Kullanıcının verdiği filme, diziye, oyuna veya müziğe bakarak sadece "tür" olarak değil; "Ana Tema (Core Tropes)" ve "Üslup/Atmosfer (Vibe & Tone)" açısından benzer hisler uyandıran kesinlikle 5 adet içerik önermelisin.
                 Önereceğin eserlerin kategorileri kesinlikle sadece şunlar olmalıdır: [${allowedCatsStr}]. Başka kategoride hiçbir eser önerme.
                 Eğer doğrudan kullanıcının aradığı evrene (franchise) ait başka eserler varsa (örneğin Star Wars aramasına The Mandalorian dizisi veya Star Wars Jedi oyunları gibi), bunları da listeye alabilirsin. Ancak aynı evrenden/franchise'dan en fazla 2 öneri yapmalısın. Kalan öneriler tamamen farklı yapımlardan olmalıdır.${excludeInstructions}
                 Dil tercihi: ${isEnglish ? 'İngilizce içerikler ve açıklamalar İngilizce olmalı.' : 'Türkçe açıklamalar olmalı.'}
