@@ -290,6 +290,18 @@
             <!-- Kitap kartları buraya JS ile yüklenecek -->
         </div>
 
+        <!-- Daha Fazla Öneri Yükle Butonu -->
+        <div id="load-more-container" class="flex justify-center mt-6 mb-8 hidden">
+            <button id="load-more-btn" onclick="loadMoreRecommendations()" class="bg-gold-600 hover:bg-gold-500 text-wood-900 font-bold py-3.5 px-8 rounded-lg transition-all duration-300 shadow-lg flex items-center gap-2 text-sm">
+                <!-- Loader spinner -->
+                <svg id="load-more-loader" class="animate-spin h-5 w-5 text-wood-900 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                <span id="load-more-text">Daha Fazla Öneri Yükle</span>
+            </button>
+        </div>
+
         <!-- Alt Kısım Yeni Arama Butonu (Kullanıcı aşağı kaydırdığında kolaylık sağlar) -->
         <div id="bottom-search-container" class="flex justify-center mt-8 mb-12">
             <button onclick="showHome()" class="bg-wood-800 hover:bg-wood-700 border border-wood-700 text-gold-500 hover:text-gold-400 font-medium py-3 px-8 rounded-lg transition-colors shadow-lg flex items-center gap-2 text-sm">
@@ -660,6 +672,8 @@
                 if (homeTitle) homeTitle.innerText = "Discover Similar Worlds";
                 if (homeSubtitle) homeSubtitle.innerText = "Enter a book, movie, show, or game you love, and we'll pull new adventures sharing the exact same themes, style, and atmosphere from the VibeVault archives.";
                 if (backBtnText) backBtnText.innerText = "New Search";
+                const loadMoreText = document.getElementById('load-more-text');
+                if (loadMoreText) loadMoreText.innerText = "Load More Recommendations";
                 if (footerText) footerText.innerText = "VibeVault © 2026 - AI-Powered Curation by Master Unagi";
  
                 if (aboutTitle) aboutTitle.innerText = "What is VibeVault?";
@@ -712,6 +726,8 @@
                 if (homeTitle) homeTitle.innerText = "Benzer Dünyaları Keşfe Çık";
                 if (homeSubtitle) homeSubtitle.innerText = "Tadı damağında kalan bir kitabı, filmi, diziyi veya oyunu yaz; onunla benzer temaları, dünyaları ve atmosferi paylaşan yeni maceraları VibeVault arşivlerinden senin için çıkaralım.";
                 if (backBtnText) backBtnText.innerText = "Yeni Arama";
+                const loadMoreText = document.getElementById('load-more-text');
+                if (loadMoreText) loadMoreText.innerText = "Daha Fazla Öneri Yükle";
                 if (footerText) footerText.innerText = "VibeVault © 2026 - Yapay Zeka Destekli Kürasyon by Master Unagi";
                 
                 if (aboutTitle) aboutTitle.innerText = "VibeVault Nedir?";
@@ -763,6 +779,15 @@
             resultsView.classList.remove('hidden');
             resultsTitle.innerText = title;
             errorMessage.classList.add('hidden');
+            
+            const loadMoreContainer = document.getElementById('load-more-container');
+            if (loadMoreContainer) {
+                if (title === "My Favorites" || title === "Favori Listem" || !currentBooks || currentBooks.length === 0) {
+                    loadMoreContainer.classList.add('hidden');
+                } else {
+                    loadMoreContainer.classList.remove('hidden');
+                }
+            }
         }
 
         function showAbout() {
@@ -1017,6 +1042,126 @@
                 if (retries === 0) throw err;
                 await new Promise(resolve => setTimeout(resolve, delay));
                 return fetchWithRetry(url, options, retries - 1, delay * 2);
+            }
+        }
+
+        async function loadMoreRecommendations() {
+            const query = searchInput.value.trim() || resultsTitle.innerText.replace(' için Öneriler', '').replace(' için Recommendations', '').replace(/"/g, '');
+            if (!query) return;
+
+            const loadMoreBtn = document.getElementById('load-more-btn');
+            const loadMoreLoader = document.getElementById('load-more-loader');
+            const loadMoreText = document.getElementById('load-more-text');
+            if (loadMoreBtn) loadMoreBtn.disabled = true;
+            if (loadMoreLoader) loadMoreLoader.classList.remove('hidden');
+            if (loadMoreText) loadMoreText.classList.add('hidden');
+
+            const searchCats = selectedCategories.length > 0 ? selectedCategories : ['book', 'movie', 'tv', 'game', 'boardgame'];
+            const excludedTitles = currentBooks.map(b => b.title);
+            const excludeInstructions = excludedTitles.length > 0 ? `\nŞu eserleri kesinlikle listeye dahil etme, bunlar zaten önerildi: [${excludedTitles.map(t => `"${t}"`).join(', ')}]` : '';
+
+            try {
+                let moreBooks = [];
+                const isCustomKey = apiKey && apiKey !== "";
+                const isDirectHtmlFile = window.location.protocol === 'file:';
+                const useDirectCall = isCustomKey || isDirectHtmlFile;
+
+                const backendCategories = [];
+                if (searchCats.includes('book')) backendCategories.push('book');
+                if (searchCats.includes('movie')) backendCategories.push('movie');
+                if (searchCats.includes('tv')) backendCategories.push('tv');
+                if (searchCats.includes('game')) backendCategories.push('game');
+                if (searchCats.includes('boardgame')) backendCategories.push('boardgame');
+                const allowedCatsStr = backendCategories.map(c => `'${c}'`).join(', ');
+
+                const systemPrompt = `Sen edebi ve kültürel kürasyon yapan uzman bir stratejistsin. Kullanıcının verdiği filme, diziye, oyuna veya müziğe bakarak sadece "tür" olarak değil; "Ana Tema (Core Tropes)" ve "Üslup/Atmosfer (Vibe & Tone)" açısından benzer hisler uyandıran en az 5, en fazla 10 adet içerik önermelisin.
+                Önereceğin eserlerin kategorileri kesinlikle sadece şunlar olmalıdır: [${allowedCatsStr}]. Başka kategoride hiçbir eser önerme.
+                Eğer doğrudan kullanıcının aradığı evrene (franchise) ait başka eserler varsa (örneğin Star Wars aramasına The Mandalorian dizisi veya Star Wars Jedi oyunları gibi), bunları da listeye alabilirsin. Ancak aynı evrenden/franchise'dan en fazla 2 öneri yapmalısın. Kalan öneriler tamamen farklı yapımlardan olmalıdır.${excludeInstructions}
+                Dil tercihi: ${isEnglish ? 'İngilizce içerikler ve açıklamalar İngilizce olmalı.' : 'Türkçe açıklamalar olmalı.'}
+                Ayrıca her öneri için kullanıcının girdisiyle ne kadar güçlü bir vibe/tema eşleşmesi olduğunu 10 üzerinden sayısal (float) bir değer olarak puanlamalısın (Örn: 9.2).
+                Ek olarak her eserden kısa, akılda kalıcı ve vurucu bir alıntı (veya ikonik bir replik) sunmalısın.
+                Yanıtın kesinlikle belirtilen JSON şemasına uymalıdır. Goodreads/IMDB/Metacritic verilerini gerçekçi bir şekilde 10 üzerinden tahmin edebilirsin (Örn: Goodreads'te 4.2 olan kitap puanını 8.4 olarak 10 üzerinden ver).`;
+
+                if (useDirectCall) {
+                    if (!apiKey) {
+                        toggleSettingsModal(true);
+                        return;
+                    }
+                    const payload = {
+                        contents: [{ parts: [{ text: `Şu içeriğe benzer vibe'a sahip YENİ, farklı eserler (kitap, film, dizi, oyun vb.) öner: ${query}` }] }],
+                        systemInstruction: { parts: [{ text: systemPrompt }] },
+                        safetySettings: [
+                            { category: "HARM_CATEGORY_HARASSMENT", threshold: "BLOCK_NONE" },
+                            { category: "HARM_CATEGORY_HATE_SPEECH", threshold: "BLOCK_NONE" },
+                            { category: "HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold: "BLOCK_NONE" },
+                            { category: "HARM_CATEGORY_DANGEROUS_CONTENT", threshold: "BLOCK_NONE" }
+                        ],
+                        generationConfig: {
+                            responseMimeType: "application/json",
+                            responseSchema: {
+                                type: "ARRAY",
+                                items: {
+                                    type: "OBJECT",
+                                    properties: {
+                                        title: { type: "STRING", description: "Eserin adı" },
+                                        author: { type: "STRING", description: "Yazar / Yönetmen / Geliştirici / Tasarımcı adı" },
+                                        category: { 
+                                            type: "STRING", 
+                                            enum: backendCategories,
+                                            description: `Kategori: Sadece şu değerlerden biri olmalıdır: ${allowedCatsStr}`
+                                        },
+                                        reason: { type: "STRING", description: "Neden önerildi? Hangi temalar ve vibe eşleşti? Kısa bir açıklama." },
+                                        rating: { type: "NUMBER", description: "Değerlendirme puanı, kesinlikle 10 üzerinden (Örn: 8.5 veya 7.2)" },
+                                        matchScore: { type: "NUMBER", description: "Eşleşme oranı, 10 üzerinden (Örn: 9.2)" },
+                                        quote: { type: "STRING", description: "Eserden ikonik, kısa bir alıntı veya replik" }
+                                    },
+                                    required: ["title", "author", "category", "reason", "rating", "matchScore", "quote"]
+                                }
+                            }
+                        }
+                    };
+
+                    const response = await fetchWithRetry(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    const data = await response.json();
+                    if (data.error) throw new Error(data.error.message || 'Gemini API Error');
+                    const textResponse = data.candidates?.[0]?.content?.parts?.[0]?.text;
+                    if (!textResponse) throw new Error('Empty response');
+                    let cleanText = textResponse.trim();
+                    if (cleanText.startsWith("```")) {
+                        const match = cleanText.match(/^```(?:json)?\s*([\s\S]*?)\s*```$/);
+                        if (match) cleanText = match[1];
+                    }
+                    moreBooks = JSON.parse(cleanText);
+                } else {
+                    const response = await fetchWithRetry('/api/recommend', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ query, isEnglish, categories: searchCats, exclude: excludedTitles })
+                    });
+                    if (!response.ok) {
+                        const errData = await response.json();
+                        throw new Error(errData.error || 'Server error');
+                    }
+                    moreBooks = await response.json();
+                }
+
+                if (moreBooks && moreBooks.length > 0) {
+                    currentBooks = currentBooks.concat(moreBooks);
+                    setCachedResults(query, isEnglish, searchCats, currentBooks);
+                    renderBooks(currentBooks);
+                    filterResultsPage(); // Apply any active filters
+                }
+            } catch (err) {
+                console.error('Error loading more:', err);
+                alert(isEnglish ? 'Failed to fetch more recommendations.' : 'Daha fazla öneri yüklenirken hata oluştu.');
+            } finally {
+                if (loadMoreBtn) loadMoreBtn.disabled = false;
+                if (loadMoreLoader) loadMoreLoader.classList.add('hidden');
+                if (loadMoreText) loadMoreText.classList.remove('hidden');
             }
         }
 

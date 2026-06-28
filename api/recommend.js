@@ -17,7 +17,7 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { query, isEnglish, categories } = req.body;
+  const { query, isEnglish, categories, exclude } = req.body;
   
   if (!query) {
     return res.status(400).json({ error: 'Query is required' });
@@ -40,9 +40,11 @@ export default async function handler(req, res) {
     if (uiCategories.includes('boardgame')) backendCategories.push('boardgame');
     const allowedCatsStr = backendCategories.map(c => `'${c}'`).join(', ');
 
+    const excludeInstructions = exclude && exclude.length > 0 ? `\nŞu eserleri kesinlikle listeye dahil etme, bunlar zaten önerildi: [${exclude.map(t => `"${t}"`).join(', ')}]` : '';
+
     const systemPrompt = `Sen edebi ve kültürel kürasyon yapan uzman bir stratejistsin. Kullanıcının verdiği filme, diziye, oyuna veya müziğe bakarak sadece "tür" olarak değil; "Ana Tema (Core Tropes)" ve "Üslup/Atmosfer (Vibe & Tone)" açısından benzer hisler uyandıran en az 5, en fazla 10 adet içerik önermelisin.
 Önereceğin eserlerin kategorileri kesinlikle sadece şunlar olmalıdır: [${allowedCatsStr}]. Başka kategoride hiçbir eser önerme.
-Eğer doğrudan kullanıcının aradığı evrene (franchise) ait başka eserler varsa (örneğin Star Wars aramasına The Mandalorian dizisi veya Star Wars Jedi oyunları gibi), bunları da listeye alabilirsin. Ancak aynı evrenden/franchise'dan en fazla 2 öneri yapmalısın. Kalan öneriler tamamen farklı yapımlardan olmalıdır.
+Eğer doğrudan kullanıcının aradığı evrene (franchise) ait başka eserler varsa (örneğin Star Wars aramasına The Mandalorian dizisi veya Star Wars Jedi oyunları gibi), bunları da listeye alabilirsin. Ancak aynı evrenden/franchise'dan en fazla 2 öneri yapmalısın. Kalan öneriler tamamen farklı yapımlardan olmalıdır.${excludeInstructions}
 Dil tercihi: ${isEnglish ? 'İngilizce içerikler ve açıklamalar İngilizce olmalı.' : 'Türkçe açıklamalar olmalı.'}
 Ayrıca her öneri için kullanıcının girdisiyle ne kadar güçlü bir vibe/tema eşleşmesi olduğunu 10 üzerinden sayısal (float) bir değer olarak puanlamalısın (Örn: 9.2).
 Ek olarak her eserden kısa, akılda kalıcı ve vurucu bir alıntı (veya ikonik bir replik) sunmalısın.
