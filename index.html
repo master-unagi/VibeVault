@@ -145,8 +145,8 @@
                 <span id="fav-count" class="absolute -top-2 -right-2 bg-gold-500 text-wood-900 text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full opacity-0 transition-opacity">0</span>
             </button>
 
-            <!-- API Key Ayarları İkonu (Varsayılan olarak gizli, yerelde gösterilecek) -->
-            <button onclick="toggleSettingsModal(true)" class="hidden text-paper-100 hover:text-gold-500 transition-colors relative group" id="nav-settings-btn" title="API Anahtarı Ayarları">
+            <!-- API Key Ayarları İkonu -->
+            <button onclick="toggleSettingsModal(true)" class="text-paper-100 hover:text-gold-500 transition-colors relative group" id="nav-settings-btn" title="API Anahtarı Ayarları">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 sm:w-6 sm:h-6">
                     <circle cx="12" cy="12" r="3"/>
                     <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
@@ -549,14 +549,10 @@
                 keyInput.value = apiKey;
             }
 
-            // Eğer file: protokolündeysek (lokal çift tıklama) ayarlar ikonunu göster, aksi takdirde gizle
+            // Ayarlar ikonunu göster
             const settingsBtnElement = document.getElementById('nav-settings-btn');
             if (settingsBtnElement) {
-                if (window.location.protocol === 'file:') {
-                    settingsBtnElement.classList.remove('hidden');
-                } else {
-                    settingsBtnElement.classList.add('hidden');
-                }
+                settingsBtnElement.classList.remove('hidden');
             }
 
             applyLanguage();
