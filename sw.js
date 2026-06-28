@@ -1,4 +1,4 @@
-const CACHE_NAME = 'vibevault-cache-v1';
+const CACHE_NAME = 'vibevault-cache-v2';
 const ASSETS = [
   './',
   './index.html',
@@ -12,6 +12,20 @@ self.addEventListener('install', (e) => {
     caches.open(CACHE_NAME).then((cache) => {
       return cache.addAll(ASSETS);
     })
+  );
+});
+
+self.addEventListener('activate', (e) => {
+  e.waitUntil(
+    caches.keys().then((keys) => {
+      return Promise.all(
+        keys.map((key) => {
+          if (key !== CACHE_NAME) {
+            return caches.delete(key);
+          }
+        })
+      );
+    }).then(() => self.clients.claim())
   );
 });
 
