@@ -336,12 +336,6 @@
             <h3 id="settings-title" class="text-xl font-serif font-bold text-gold-500 mb-4">Gemini API Ayarları</h3>
             <p id="settings-desc" class="text-sm text-paper-200/80 mb-4 font-light leading-relaxed">Arama yapabilmek için kendi Gemini API anahtarınızı girmeniz gerekmektedir. Anahtarınız tarayıcınızda (localStorage) güvenle saklanır.</p>
             <input type="password" id="api-key-input" class="w-full bg-wood-900 border border-wood-700 rounded p-3 text-paper-100 placeholder-paper-200/30 outline-none text-sm font-mono mb-4" placeholder="AIzaSy...">
-            
-            <div class="flex items-center gap-2 mb-6 cursor-pointer select-none">
-                <input type="checkbox" id="test-covers-input" class="w-4 h-4 rounded accent-gold-600 cursor-pointer">
-                <label for="test-covers-input" id="settings-test-covers-label" class="text-xs text-paper-200/80 font-light cursor-pointer">Deneme: Üzerine gelince kapak görselini yükle (Beta)</label>
-            </div>
-
             <div class="flex justify-end gap-3">
                 <button onclick="saveApiKey()" id="settings-save-btn" class="bg-gold-600 hover:bg-gold-500 text-wood-900 font-bold py-2 px-4 rounded text-sm transition-colors">Kaydet</button>
             </div>
@@ -673,8 +667,6 @@
                 if (settingsTitle) settingsTitle.innerText = "Gemini API Settings";
                 if (settingsDesc) settingsDesc.innerText = "You need to enter your Gemini API key to make searches. Your key is stored securely in your browser (localStorage).";
                 if (apiKeyInput) apiKeyInput.placeholder = "API Key (AIzaSy...)";
-                const testCoversLabel = document.getElementById('settings-test-covers-label');
-                if (testCoversLabel) testCoversLabel.innerText = "Experimental: Load cover image on hover (Beta)";
                 if (settingsSaveBtn) settingsSaveBtn.innerText = "Save";
                 if (navFavBtn) navFavBtn.title = "My Favorites";
                 if (navSettingsBtn) navSettingsBtn.title = "API Key Settings";
@@ -727,8 +719,6 @@
                 if (settingsTitle) settingsTitle.innerText = "Gemini API Ayarları";
                 if (settingsDesc) settingsDesc.innerText = "Arama yapabilmek için kendi Gemini API anahtarınızı girmeniz gerekmektedir. Anahtarınız tarayıcınızda (localStorage) güvenle saklanır.";
                 if (apiKeyInput) apiKeyInput.placeholder = "API Anahtarı (AIzaSy...)";
-                const testCoversLabel = document.getElementById('settings-test-covers-label');
-                if (testCoversLabel) testCoversLabel.innerText = "Deneme: Üzerine gelince kapak görselini yükle (Beta)";
                 if (settingsSaveBtn) settingsSaveBtn.innerText = "Kaydet";
                 if (navFavBtn) navFavBtn.title = "Favori Listem";
                 if (navSettingsBtn) navSettingsBtn.title = "API Anahtarı Ayarları";
@@ -1071,16 +1061,11 @@
                 const categoryDetails = getCategoryDetails(book.category || 'book');
                 
                 const card = document.createElement('div');
-                card.className = "bg-wood-800/80 border border-wood-700 rounded-xl p-6 relative flex flex-col transition-transform duration-300 hover:-translate-y-2 hover:shadow-[0_10px_30px_rgba(0,0,0,0.5)] group overflow-hidden";
+                card.className = "bg-wood-800/80 border border-wood-700 rounded-xl p-6 relative flex flex-col transition-transform duration-300 hover:-translate-y-2 hover:shadow-[0_10px_30px_rgba(0,0,0,0.5)] group";
                 card.setAttribute('onclick', 'toggleQuote(this, event)');
-                card.setAttribute('onmouseenter', 'loadCoverArt(this)');
                 card.setAttribute('data-category', book.category || 'book');
-                card.setAttribute('data-title', book.title || '');
-                card.setAttribute('data-author', book.author || '');
                 
                 card.innerHTML = `
-                    <div class="absolute inset-0 bg-cover bg-center opacity-0 group-hover:opacity-20 transition-opacity duration-700 pointer-events-none rounded-xl filter blur-[3px] cover-bg-image" style="background-image: none"></div>
-                    <div class="absolute inset-0 bg-wood-950/40 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none rounded-xl"></div>
                     <div class="absolute top-4 right-4 flex items-center gap-3">
                         <button onclick="event.stopPropagation(); shareItem('${bookId}')" 
                                 class="text-xl text-wood-700 hover:text-gold-500 transition-colors" title="${isEnglish ? 'Share' : 'Paylaş'}">
@@ -1153,14 +1138,7 @@
                 if (show) {
                     modal.classList.remove('hidden');
                     const keyInput = document.getElementById('api-key-input');
-                    if (keyInput) {
-                        keyInput.value = apiKey || '';
-                        keyInput.focus();
-                    }
-                    const testCoversInput = document.getElementById('test-covers-input');
-                    if (testCoversInput) {
-                        testCoversInput.checked = localStorage.getItem('vibeVaultTestCovers') === 'true';
-                    }
+                    if (keyInput) keyInput.focus();
                 } else {
                     modal.classList.add('hidden');
                 }
@@ -1173,49 +1151,7 @@
                 const value = keyInput.value.trim();
                 apiKey = value;
                 localStorage.setItem('vibeVaultApiKey', value);
-            }
-            const testCoversInput = document.getElementById('test-covers-input');
-            if (testCoversInput) {
-                localStorage.setItem('vibeVaultTestCovers', testCoversInput.checked ? 'true' : 'false');
-            }
-            toggleSettingsModal(false);
-        }
-
-        async function fetchCoverImage(title, author, category) {
-            try {
-                const query = `${title} ${author || ''} ${category || ''}`;
-                const langCode = isEnglish ? 'en' : 'tr';
-                const url = `https://${langCode}.wikipedia.org/w/api.php?action=query&format=json&generator=search&gsrsearch=${encodeURIComponent(query)}&gsrlimit=1&prop=pageimages&pithumbsize=500&pilicense=any&origin=*`;
-                const response = await fetch(url);
-                if (!response.ok) return null;
-                const data = await response.json();
-                const pages = data.query?.pages;
-                if (!pages) return null;
-                const pageId = Object.keys(pages)[0];
-                return pages[pageId]?.thumbnail?.source || null;
-            } catch (e) {
-                console.error('Error fetching cover:', e);
-                return null;
-            }
-        }
-
-        async function loadCoverArt(cardElement) {
-            if (localStorage.getItem('vibeVaultTestCovers') !== 'true') return;
-            const bgImageDiv = cardElement.querySelector('.cover-bg-image');
-            if (!bgImageDiv || bgImageDiv.style.backgroundImage !== 'none') return;
-            
-            // Set a temp state to prevent double triggers
-            bgImageDiv.style.backgroundImage = 'url("")'; 
-            
-            const title = cardElement.getAttribute('data-title');
-            const author = cardElement.getAttribute('data-author');
-            const category = cardElement.getAttribute('data-category');
-            
-            const coverUrl = await fetchCoverImage(title, author, category);
-            if (coverUrl) {
-                bgImageDiv.style.backgroundImage = `url("${coverUrl}")`;
-                bgImageDiv.classList.remove('opacity-0');
-                bgImageDiv.classList.add('opacity-20');
+                toggleSettingsModal(false);
             }
         }
 
