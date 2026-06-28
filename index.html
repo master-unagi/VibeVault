@@ -1243,25 +1243,23 @@
             const siteUrl = window.location.protocol.startsWith('http') ? window.location.origin : 'https://vibevault.vercel.app';
             const shareTitle = `VibeVault: ${item.title}`;
             let shareText = isEnglish 
-                ? `I found this ${catLabel.toLowerCase()} recommendation on VibeVault based on "${query}":\n\n${item.title} by ${item.author}\nMatch Score: ${item.matchScore}/10\n\nWhy: ${item.reason}`
-                : `VibeVault'ta "${query}" aramam üzerine şu ${catLabel.toLowerCase()} önerisini buldum:\n\n${item.title} - ${item.author}\nEşleşme Skoru: ${item.matchScore}/10\n\nNeden Önerildi: ${item.reason}`;
+                ? `Check out this match for the vibe of "${query}" I found on VibeVault:\n\n${item.title} by ${item.author}\nVibe Match Score: ${item.matchScore}/10\n\nWhy: ${item.reason}\n\nIf you want to find worlds similar to what you love: ${siteUrl}`
+                : `VibeVault'ta "${query}" "vibe'ına" uygun bulduğuma bak:\n\n${item.title} - ${item.author}\nVibe Uyum Skoru: ${item.matchScore}/10\n\nNeden Önerildi: ${item.reason}\n\nSen de aradığına benzer dünyalar bulmak istiyorsan: ${siteUrl}`;
 
             // Tarayıcının yerleşik paylaşım menüsünü (Notlar, Anımsatıcılar vb.) tetikler
             if (navigator.share) {
                 try {
                     await navigator.share({
                         title: shareTitle,
-                        text: shareText,
-                        url: siteUrl
+                        text: shareText
                     });
                 } catch (err) {
                     console.log('Paylaşım iptal edildi veya desteklenmiyor', err);
                 }
             } else {
-                // Eğer cihazda yerleşik paylaşım yoksa (eski masaüstü vb.) panoya kopyalarken linki metne ekler
-                const fullShareText = `${shareText}\n\n${isEnglish ? 'Discover similar worlds' : 'Benzer dünyaları keşfe çıkmak için'}: ${siteUrl}`;
+                // Eğer cihazda yerleşik paylaşım yoksa (eski masaüstü vb.) panoya kopyalar
                 const textArea = document.createElement("textarea");
-                textArea.value = fullShareText;
+                textArea.value = shareText;
                 document.body.appendChild(textArea);
                 textArea.select();
                 try {
