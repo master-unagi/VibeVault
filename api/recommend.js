@@ -46,7 +46,7 @@ Eğer doğrudan kullanıcının aradığı evrene (franchise) ait başka eserler
 Dil tercihi: ${isEnglish ? 'İngilizce içerikler ve açıklamalar İngilizce olmalı.' : 'Türkçe açıklamalar olmalı.'}
 Ayrıca her öneri için kullanıcının girdisiyle ne kadar güçlü bir vibe/tema eşleşmesi olduğunu 10 üzerinden sayısal (float) bir değer olarak puanlamalısın (Örn: 9.2).
 Ek olarak her eserden kısa, akılda kalıcı ve vurucu bir alıntı (veya ikonik bir replik) sunmalısın.
-Yanıtın kesinlikle belirtilen JSON şemasına uymalıdır. Goodreads/IMDB/Metacritic verilerini gerçekçi bir şekilde tahmin edebilirsin.`;
+Yanıtın kesinlikle belirtilen JSON şemasına uymalıdır. Goodreads/IMDB/Metacritic verilerini gerçekçi bir şekilde 10 üzerinden tahmin edebilirsin (Örn: Goodreads'te 4.2 olan kitap puanını 8.4 olarak 10 üzerinden ver).`;
 
     const payload = {
       contents: [{ parts: [{ text: `Şu içeriğe benzer vibe'a sahip eserler (kitap, film, dizi, oyun vb.) öner: ${query}` }] }],
@@ -72,7 +72,7 @@ Yanıtın kesinlikle belirtilen JSON şemasına uymalıdır. Goodreads/IMDB/Meta
                 description: `Kategori: Sadece şu değerlerden biri olmalıdır: ${allowedCatsStr}`
               },
               reason: { type: "STRING", description: "Neden önerildi? Hangi temalar ve vibe eşleşti? Kısa bir açıklama." },
-              rating: { type: "NUMBER", description: "Değerlendirme puanı (Örn: 8.5 veya 4.15)" },
+              rating: { type: "NUMBER", description: "Değerlendirme puanı, kesinlikle 10 üzerinden (Örn: 8.5 veya 7.2)" },
               matchScore: { type: "NUMBER", description: "Eşleşme oranı, 10 üzerinden (Örn: 9.2)" },
               quote: { type: "STRING", description: "Eserden ikonik, kısa bir alıntı veya replik" }
             },

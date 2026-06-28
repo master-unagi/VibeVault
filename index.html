@@ -894,7 +894,7 @@
                     Dil tercihi: ${isEnglish ? 'İngilizce içerikler ve açıklamalar İngilizce olmalı.' : 'Türkçe açıklamalar olmalı.'}
                     Ayrıca her öneri için kullanıcının girdisiyle ne kadar güçlü bir vibe/tema eşleşmesi olduğunu 10 üzerinden sayısal (float) bir değer olarak puanlamalısın (Örn: 9.2).
                     Ek olarak her eserden kısa, akılda kalıcı ve vurucu bir alıntı (veya ikonik bir replik) sunmalısın.
-                    Yanıtın kesinlikle belirtilen JSON şemasına uymalıdır. Goodreads/IMDB/Metacritic verilerini gerçekçi bir şekilde tahmin edebilirsin.`;
+                    Yanıtın kesinlikle belirtilen JSON şemasına uymalıdır. Goodreads/IMDB/Metacritic verilerini gerçekçi bir şekilde 10 üzerinden tahmin edebilirsin (Örn: Goodreads'te 4.2 olan kitap puanını 8.4 olarak 10 üzerinden ver).`;
 
                     const payload = {
                         contents: [{ parts: [{ text: `Şu içeriğe benzer vibe'a sahip eserler (kitap, film, dizi, oyun vb.) öner: ${query}` }] }],
@@ -920,7 +920,7 @@
                                             description: `Kategori: Sadece şu değerlerden biri olmalıdır: ${allowedCatsStr}`
                                         },
                                         reason: { type: "STRING", description: "Neden önerildi? Hangi temalar ve vibe eşleşti? Kısa bir açıklama." },
-                                        rating: { type: "NUMBER", description: "Değerlendirme puanı (Örn: 8.5 veya 4.15)" },
+                                        rating: { type: "NUMBER", description: "Değerlendirme puanı, kesinlikle 10 üzerinden (Örn: 8.5 veya 7.2)" },
                                         matchScore: { type: "NUMBER", description: "Eşleşme oranı, 10 üzerinden (Örn: 9.2)" },
                                         quote: { type: "STRING", description: "Eserden ikonik, kısa bir alıntı veya replik" }
                                     },
@@ -1121,7 +1121,7 @@
                             <span class="flex items-center gap-1 text-gold-500">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                                 <span class="text-gold-500/80 font-bold">${isEnglish ? 'Avg. Rating' : 'Ort. Puan'}:</span>
-                                <span class="text-paper-200">${book.rating}</span>
+                                <span class="text-paper-200 font-bold">${book.rating}/10</span>
                             </span>
                             <!-- Info Icon with Tooltip -->
                             <div class="relative group/info inline-block cursor-help flex items-center">
