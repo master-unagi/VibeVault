@@ -1240,25 +1240,28 @@
             const catLabel = getCategoryDetails(item.category).label;
             const query = resultsTitle.innerText.replace(' için Öneriler', '').replace(' için Recommendations', '').replace(/"/g, '');
             
+            const siteUrl = window.location.protocol.startsWith('http') ? window.location.origin : 'https://vibevault.vercel.app';
             const shareTitle = `VibeVault: ${item.title}`;
             let shareText = isEnglish 
-                ? `I found this ${catLabel.toLowerCase()} recommendation on VibeVault based on "${query}":\n\n${item.title} by ${item.author}\nMatch Score: ${item.matchScore}\n\nWhy: ${item.reason}`
-                : `VibeVault'ta "${query}" aramam üzerine şu ${catLabel.toLowerCase()} önerisini buldum:\n\n${item.title} - ${item.author}\nEşleşme Skoru: ${item.matchScore}\n\nNeden Önerildi: ${item.reason}`;
+                ? `I found this ${catLabel.toLowerCase()} recommendation on VibeVault based on "${query}":\n\n${item.title} by ${item.author}\nMatch Score: ${item.matchScore}/10\n\nWhy: ${item.reason}`
+                : `VibeVault'ta "${query}" aramam üzerine şu ${catLabel.toLowerCase()} önerisini buldum:\n\n${item.title} - ${item.author}\nEşleşme Skoru: ${item.matchScore}/10\n\nNeden Önerildi: ${item.reason}`;
 
             // Tarayıcının yerleşik paylaşım menüsünü (Notlar, Anımsatıcılar vb.) tetikler
             if (navigator.share) {
                 try {
                     await navigator.share({
                         title: shareTitle,
-                        text: shareText
+                        text: shareText,
+                        url: siteUrl
                     });
                 } catch (err) {
                     console.log('Paylaşım iptal edildi veya desteklenmiyor', err);
                 }
             } else {
-                // Eğer cihazda yerleşik paylaşım yoksa (eski masaüstü vb.) panoya kopyalar
+                // Eğer cihazda yerleşik paylaşım yoksa (eski masaüstü vb.) panoya kopyalarken linki metne ekler
+                const fullShareText = `${shareText}\n\n${isEnglish ? 'Discover similar worlds' : 'Benzer dünyaları keşfe çıkmak için'}: ${siteUrl}`;
                 const textArea = document.createElement("textarea");
-                textArea.value = shareText;
+                textArea.value = fullShareText;
                 document.body.appendChild(textArea);
                 textArea.select();
                 try {
