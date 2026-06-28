@@ -210,10 +210,15 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"/><polyline points="17 2 12 7 7 2"/></svg>
                     <span id="label-tv">Dizi</span>
                 </button>
-                <!-- Oyun -->
+                <!-- Video Oyunu -->
                 <button onclick="toggleCategory('game')" id="chip-game" class="flex items-center gap-2 px-4 py-2 rounded-full border border-gold-600 bg-gold-600 text-wood-900 hover:bg-gold-500 font-medium text-sm transition-all duration-300 shadow-md">
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 512 512" fill="currentColor" class="w-3.5 h-3.5"><path d="M467.51 248.83c-18.4-83.18-45.69-136.24-89.43-149.17A91.5 91.5 0 00352 96c-26.89 0-48.11 16-96 16s-69.15-16-96-16a99.09 99.09 0 00-27.2 3.66C89 112.59 61.94 165.7 43.33 248.83c-19 84.91-15.56 152 21.58 164.88 26 9 49.25-9.61 71.27-37 25-31.2 55.79-40.8 119.82-40.8s93.62 9.6 118.66 40.8c22 27.41 46.11 45.79 71.42 37.16 41.02-14.01 40.44-79.13 21.43-165.04z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/><circle cx="292" cy="224" r="20"/><circle cx="336" cy="268" r="20"/><circle cx="336" cy="180" r="20"/><circle cx="380" cy="224" r="20"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M160 176v96M208 224h-96"/></svg>
-                    <span id="label-game">Oyun</span>
+                    <span id="label-game">Video Oyunu</span>
+                </button>
+                <!-- Kutu Oyunu -->
+                <button onclick="toggleCategory('boardgame')" id="chip-boardgame" class="flex items-center gap-2 px-4 py-2 rounded-full border border-gold-600 bg-gold-600 text-wood-900 hover:bg-gold-500 font-medium text-sm transition-all duration-300 shadow-md">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5"><rect x="2" y="2" width="20" height="20" rx="2"/><circle cx="8" cy="8" r="1.5"/><circle cx="16" cy="16" r="1.5"/><circle cx="8" cy="16" r="1.5"/><circle cx="16" cy="8" r="1.5"/><circle cx="12" cy="12" r="1.5"/></svg>
+                    <span id="label-boardgame">Kutu Oyunu</span>
                 </button>
             </div>
         </div>
@@ -265,10 +270,15 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"/><polyline points="17 2 12 7 7 2"/></svg>
                 <span id="res-label-tv">Dizi</span>
             </button>
-            <!-- Oyun -->
+            <!-- Video Oyunu -->
             <button onclick="toggleResultsFilter('game')" id="res-chip-game" class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-gold-600 bg-gold-600 text-wood-900 hover:bg-gold-500 font-medium text-xs transition-all duration-300 shadow-sm">
                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 512 512" fill="currentColor" class="w-3 h-3"><path d="M467.51 248.83c-18.4-83.18-45.69-136.24-89.43-149.17A91.5 91.5 0 00352 96c-26.89 0-48.11 16-96 16s-69.15-16-96-16a99.09 99.09 0 00-27.2 3.66C89 112.59 61.94 165.7 43.33 248.83c-19 84.91-15.56 152 21.58 164.88 26 9 49.25-9.61 71.27-37 25-31.2 55.79-40.8 119.82-40.8s93.62 9.6 118.66 40.8c22 27.41 46.11 45.79 71.42 37.16 41.02-14.01 40.44-79.13 21.43-165.04z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/><circle cx="292" cy="224" r="20"/><circle cx="336" cy="268" r="20"/><circle cx="336" cy="180" r="20"/><circle cx="380" cy="224" r="20"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M160 176v96M208 224h-96"/></svg>
-                <span id="res-label-game">Oyun</span>
+                <span id="res-label-game">Video Oyunu</span>
+            </button>
+            <!-- Kutu Oyunu -->
+            <button onclick="toggleResultsFilter('boardgame')" id="res-chip-boardgame" class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-gold-600 bg-gold-600 text-wood-900 hover:bg-gold-500 font-medium text-xs transition-all duration-300 shadow-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3"><rect x="2" y="2" width="20" height="20" rx="2"/><circle cx="8" cy="8" r="1.5"/><circle cx="16" cy="16" r="1.5"/><circle cx="8" cy="16" r="1.5"/><circle cx="16" cy="8" r="1.5"/><circle cx="12" cy="12" r="1.5"/></svg>
+                <span id="res-label-boardgame">Kutu Oyunu</span>
             </button>
         </div>
 
@@ -429,8 +439,8 @@
         }
         let currentBooks = []; 
         let loadingInterval;
-        let selectedCategories = ['book', 'movie', 'tv', 'game'];
-        let activeResultsFilters = ['book', 'movie', 'tv', 'game'];
+        let selectedCategories = ['book', 'movie', 'tv', 'game', 'boardgame'];
+        let activeResultsFilters = ['book', 'movie', 'tv', 'game', 'boardgame'];
 
         function updateChipStyles(chipId, isActive) {
             const chip = document.getElementById(chipId);
@@ -478,9 +488,7 @@
             let visibleCount = 0;
             cards.forEach(card => {
                 const cat = card.getAttribute('data-category');
-                const matches = (cat === 'game' || cat === 'boardgame') 
-                    ? activeResultsFilters.includes('game') 
-                    : activeResultsFilters.includes(cat);
+                const matches = activeResultsFilters.includes(cat);
                     
                 if (matches) {
                     card.classList.remove('hidden');
@@ -632,7 +640,9 @@
                 const labelTv = document.getElementById('label-tv');
                 if (labelTv) labelTv.innerText = "TV Show";
                 const labelGame = document.getElementById('label-game');
-                if (labelGame) labelGame.innerText = "Game";
+                if (labelGame) labelGame.innerText = "Video Game";
+                const labelBoardgame = document.getElementById('label-boardgame');
+                if (labelBoardgame) labelBoardgame.innerText = "Board Game";
 
                 // Sonuç Filtreleme Etiketleri
                 const resFilterLabel = document.getElementById('results-filter-label');
@@ -644,7 +654,9 @@
                 const resLabelTv = document.getElementById('res-label-tv');
                 if (resLabelTv) resLabelTv.innerText = "TV Show";
                 const resLabelGame = document.getElementById('res-label-game');
-                if (resLabelGame) resLabelGame.innerText = "Game";
+                if (resLabelGame) resLabelGame.innerText = "Video Game";
+                const resLabelBoardgame = document.getElementById('res-label-boardgame');
+                if (resLabelBoardgame) resLabelBoardgame.innerText = "Board Game";
                 
                 if (homeTitle) homeTitle.innerText = "Find Your Next Adventure";
                 if (homeSubtitle) homeSubtitle.innerText = "Type in a movie, TV show, book or video game you love, and we'll fetch recommendations with the exact same vibe.";
@@ -680,7 +692,9 @@
                 const labelTv = document.getElementById('label-tv');
                 if (labelTv) labelTv.innerText = "Dizi";
                 const labelGame = document.getElementById('label-game');
-                if (labelGame) labelGame.innerText = "Oyun";
+                if (labelGame) labelGame.innerText = "Video Oyunu";
+                const labelBoardgame = document.getElementById('label-boardgame');
+                if (labelBoardgame) labelBoardgame.innerText = "Kutu Oyunu";
 
                 // Sonuç Filtreleme Etiketleri
                 const resFilterLabel = document.getElementById('results-filter-label');
@@ -692,7 +706,9 @@
                 const resLabelTv = document.getElementById('res-label-tv');
                 if (resLabelTv) resLabelTv.innerText = "Dizi";
                 const resLabelGame = document.getElementById('res-label-game');
-                if (resLabelGame) resLabelGame.innerText = "Oyun";
+                if (resLabelGame) resLabelGame.innerText = "Video Oyunu";
+                const resLabelBoardgame = document.getElementById('res-label-boardgame');
+                if (resLabelBoardgame) resLabelBoardgame.innerText = "Kutu Oyunu";
                 
                 if (homeTitle) homeTitle.innerText = "Sıradaki Maceranı Bul";
                 if (homeSubtitle) homeSubtitle.innerText = "Sevdiğin bir filmi, diziyi veya oyunu yaz, sana aynı hissi veren içerikleri getirelim.";
@@ -813,7 +829,7 @@
                 
                 // Sonuç filtresini arama esnasındaki kategorilerle eşle
                 activeResultsFilters = [...selectedCategories];
-                ['book', 'movie', 'tv', 'game'].forEach(cat => {
+                ['book', 'movie', 'tv', 'game', 'boardgame'].forEach(cat => {
                     updateChipStyles(`res-chip-${cat}`, activeResultsFilters.includes(cat));
                 });
                 
@@ -866,10 +882,8 @@
                     if (selectedCategories.includes('book')) backendCategories.push('book');
                     if (selectedCategories.includes('movie')) backendCategories.push('movie');
                     if (selectedCategories.includes('tv')) backendCategories.push('tv');
-                    if (selectedCategories.includes('game')) {
-                        backendCategories.push('game');
-                        backendCategories.push('boardgame');
-                    }
+                    if (selectedCategories.includes('game')) backendCategories.push('game');
+                    if (selectedCategories.includes('boardgame')) backendCategories.push('boardgame');
                     const allowedCatsStr = backendCategories.map(c => `'${c}'`).join(', ');
 
                     // System Prompt ve Yapılandırma
@@ -972,7 +986,7 @@
                 
                 // Sonuç filtresini arama esnasındaki kategorilerle eşle
                 activeResultsFilters = [...selectedCategories];
-                ['book', 'movie', 'tv', 'game'].forEach(cat => {
+                ['book', 'movie', 'tv', 'game', 'boardgame'].forEach(cat => {
                     updateChipStyles(`res-chip-${cat}`, activeResultsFilters.includes(cat));
                 });
 

@@ -31,15 +31,13 @@ export default async function handler(req, res) {
   }
 
   try {
-    const uiCategories = categories || ['book', 'movie', 'tv', 'game'];
+    const uiCategories = categories || ['book', 'movie', 'tv', 'game', 'boardgame'];
     const backendCategories = [];
     if (uiCategories.includes('book')) backendCategories.push('book');
     if (uiCategories.includes('movie')) backendCategories.push('movie');
     if (uiCategories.includes('tv')) backendCategories.push('tv');
-    if (uiCategories.includes('game')) {
-      backendCategories.push('game');
-      backendCategories.push('boardgame');
-    }
+    if (uiCategories.includes('game')) backendCategories.push('game');
+    if (uiCategories.includes('boardgame')) backendCategories.push('boardgame');
     const allowedCatsStr = backendCategories.map(c => `'${c}'`).join(', ');
 
     const systemPrompt = `Sen edebi ve kültürel kürasyon yapan uzman bir stratejistsin. Kullanıcının verdiği filme, diziye, oyuna veya müziğe bakarak sadece "tür" olarak değil; "Ana Tema (Core Tropes)" ve "Üslup/Atmosfer (Vibe & Tone)" açısından benzer hisler uyandıran en az 5, en fazla 10 adet içerik önermelisin.
