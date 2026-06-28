@@ -191,6 +191,33 @@
             <div id="loading-text" class="hidden text-sm mt-3 text-gold-500 font-medium tracking-wide animate-pulse text-center"></div>
         </div>
 
+        <!-- Kategori Çipleri -->
+        <div class="w-full flex flex-col items-center -mt-4 mb-10">
+            <span id="category-select-label" class="text-xs font-bold tracking-widest text-gold-500/80 uppercase mb-3">Öneri Kategorileri</span>
+            <div class="flex flex-wrap justify-center gap-3">
+                <!-- Kitap -->
+                <button onclick="toggleCategory('book')" id="chip-book" class="flex items-center gap-2 px-4 py-2 rounded-full border border-gold-600 bg-gold-600 text-wood-900 hover:bg-gold-500 font-medium text-sm transition-all duration-300 shadow-md">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
+                    <span id="label-book">Kitap</span>
+                </button>
+                <!-- Film -->
+                <button onclick="toggleCategory('movie')" id="chip-movie" class="flex items-center gap-2 px-4 py-2 rounded-full border border-gold-600 bg-gold-600 text-wood-900 hover:bg-gold-500 font-medium text-sm transition-all duration-300 shadow-md">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/></svg>
+                    <span id="label-movie">Film</span>
+                </button>
+                <!-- Dizi -->
+                <button onclick="toggleCategory('tv')" id="chip-tv" class="flex items-center gap-2 px-4 py-2 rounded-full border border-gold-600 bg-gold-600 text-wood-900 hover:bg-gold-500 font-medium text-sm transition-all duration-300 shadow-md">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"/><polyline points="17 2 12 7 7 2"/></svg>
+                    <span id="label-tv">Dizi</span>
+                </button>
+                <!-- Oyun -->
+                <button onclick="toggleCategory('game')" id="chip-game" class="flex items-center gap-2 px-4 py-2 rounded-full border border-gold-600 bg-gold-600 text-wood-900 hover:bg-gold-500 font-medium text-sm transition-all duration-300 shadow-md">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5"><rect x="2" y="6" width="20" height="12" rx="20"/><path d="M6 12h4"/><path d="M8 10v4"/><circle cx="15" cy="13" r="1"/><circle cx="18" cy="11" r="1"/></svg>
+                    <span id="label-game">Oyun</span>
+                </button>
+            </div>
+        </div>
+
         <!-- Günün Alıntısı -->
         <div class="w-full max-w-2xl mt-4 opacity-60 hover:opacity-100 transition-opacity duration-700 cursor-default">
             <div class="px-6 text-center">
@@ -218,6 +245,31 @@
                     <span id="back-btn-text">Yeni Arama</span>
                 </button>
             </div>
+        </div>
+
+        <!-- Sonuç Filtreleme Çipleri -->
+        <div id="results-filters-container" class="flex flex-wrap justify-start items-center gap-2.5 mb-6">
+            <span id="results-filter-label" class="text-xs font-bold tracking-wider text-gold-500/60 uppercase mr-1">Filtrele:</span>
+            <!-- Kitap -->
+            <button onclick="toggleResultsFilter('book')" id="res-chip-book" class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-gold-600 bg-gold-600 text-wood-900 hover:bg-gold-500 font-medium text-xs transition-all duration-300 shadow-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
+                <span id="res-label-book">Kitap</span>
+            </button>
+            <!-- Film -->
+            <button onclick="toggleResultsFilter('movie')" id="res-chip-movie" class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-gold-600 bg-gold-600 text-wood-900 hover:bg-gold-500 font-medium text-xs transition-all duration-300 shadow-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/></svg>
+                <span id="res-label-movie">Film</span>
+            </button>
+            <!-- Dizi -->
+            <button onclick="toggleResultsFilter('tv')" id="res-chip-tv" class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-gold-600 bg-gold-600 text-wood-900 hover:bg-gold-500 font-medium text-xs transition-all duration-300 shadow-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"/><polyline points="17 2 12 7 7 2"/></svg>
+                <span id="res-label-tv">Dizi</span>
+            </button>
+            <!-- Oyun -->
+            <button onclick="toggleResultsFilter('game')" id="res-chip-game" class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-gold-600 bg-gold-600 text-wood-900 hover:bg-gold-500 font-medium text-xs transition-all duration-300 shadow-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3"><rect x="2" y="6" width="20" height="12" rx="20"/><path d="M6 12h4"/><path d="M8 10v4"/><circle cx="15" cy="13" r="1"/><circle cx="18" cy="11" r="1"/></svg>
+                <span id="res-label-game">Oyun</span>
+            </button>
         </div>
 
         <!-- Hata / Mesaj Alanı -->
@@ -377,6 +429,83 @@
         }
         let currentBooks = []; 
         let loadingInterval;
+        let selectedCategories = ['book', 'movie', 'tv', 'game'];
+        let activeResultsFilters = ['book', 'movie', 'tv', 'game'];
+
+        function updateChipStyles(chipId, isActive) {
+            const chip = document.getElementById(chipId);
+            if (!chip) return;
+            if (isActive) {
+                // Remove inactive styles
+                chip.classList.remove('border-wood-700', 'bg-wood-800/50', 'text-paper-200', 'hover:bg-wood-700/30');
+                // Add active styles
+                chip.classList.add('border-gold-600', 'bg-gold-600', 'text-wood-900', 'hover:bg-gold-500');
+            } else {
+                // Remove active styles
+                chip.classList.remove('border-gold-600', 'bg-gold-600', 'text-wood-900', 'hover:bg-gold-500');
+                // Add inactive styles
+                chip.classList.add('border-wood-700', 'bg-wood-800/50', 'text-paper-200', 'hover:bg-wood-700/30');
+            }
+        }
+
+        function toggleCategory(category) {
+            const index = selectedCategories.indexOf(category);
+            if (index > -1) {
+                if (selectedCategories.length === 1) return; // Keep at least one selected
+                selectedCategories.splice(index, 1);
+                updateChipStyles(`chip-${category}`, false);
+            } else {
+                selectedCategories.push(category);
+                updateChipStyles(`chip-${category}`, true);
+            }
+        }
+
+        function toggleResultsFilter(category) {
+            const index = activeResultsFilters.indexOf(category);
+            if (index > -1) {
+                if (activeResultsFilters.length === 1) return; // Keep at least one selected
+                activeResultsFilters.splice(index, 1);
+                updateChipStyles(`res-chip-${category}`, false);
+            } else {
+                activeResultsFilters.push(category);
+                updateChipStyles(`res-chip-${category}`, true);
+            }
+            filterResultsPage();
+        }
+
+        function filterResultsPage() {
+            const cards = booksGrid.querySelectorAll('[data-category]');
+            let visibleCount = 0;
+            cards.forEach(card => {
+                const cat = card.getAttribute('data-category');
+                const matches = (cat === 'game' || cat === 'boardgame') 
+                    ? activeResultsFilters.includes('game') 
+                    : activeResultsFilters.includes(cat);
+                    
+                if (matches) {
+                    card.classList.remove('hidden');
+                    visibleCount++;
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+            
+            let emptyMsg = document.getElementById('results-empty-message');
+            if (visibleCount === 0) {
+                if (!emptyMsg) {
+                    emptyMsg = document.createElement('p');
+                    emptyMsg.id = 'results-empty-message';
+                    emptyMsg.className = 'text-paper-200 text-center col-span-full py-8';
+                    emptyMsg.innerText = isEnglish ? 'No matches for the selected filters.' : 'Seçili filtrelere uygun sonuç bulunamadı.';
+                    booksGrid.appendChild(emptyMsg);
+                } else {
+                    emptyMsg.classList.remove('hidden');
+                    emptyMsg.innerText = isEnglish ? 'No matches for the selected filters.' : 'Seçili filtrelere uygun sonuç bulunamadı.';
+                }
+            } else if (emptyMsg) {
+                emptyMsg.classList.add('hidden');
+            }
+        }
 
         // Eski basit veri şeması varsa ve yeni tasarıma geçiyorsak sıfırla (hata almamak için)
         if (favorites.length > 0 && !favorites[0].category) {
@@ -493,6 +622,30 @@
                 if (searchInput) searchInput.placeholder = "E.g: The Matrix, Dune, Norse Mythology, Star Wars...";
                 if (btnText) btnText.innerText = "Search";
                 
+                // Kategori Seçim Etiketleri
+                const catLabel = document.getElementById('category-select-label');
+                if (catLabel) catLabel.innerText = "Recommendation Categories";
+                const labelBook = document.getElementById('label-book');
+                if (labelBook) labelBook.innerText = "Book";
+                const labelMovie = document.getElementById('label-movie');
+                if (labelMovie) labelMovie.innerText = "Movie";
+                const labelTv = document.getElementById('label-tv');
+                if (labelTv) labelTv.innerText = "TV Show";
+                const labelGame = document.getElementById('label-game');
+                if (labelGame) labelGame.innerText = "Game";
+
+                // Sonuç Filtreleme Etiketleri
+                const resFilterLabel = document.getElementById('results-filter-label');
+                if (resFilterLabel) resFilterLabel.innerText = "Filter:";
+                const resLabelBook = document.getElementById('res-label-book');
+                if (resLabelBook) resLabelBook.innerText = "Book";
+                const resLabelMovie = document.getElementById('res-label-movie');
+                if (resLabelMovie) resLabelMovie.innerText = "Movie";
+                const resLabelTv = document.getElementById('res-label-tv');
+                if (resLabelTv) resLabelTv.innerText = "TV Show";
+                const resLabelGame = document.getElementById('res-label-game');
+                if (resLabelGame) resLabelGame.innerText = "Game";
+                
                 if (homeTitle) homeTitle.innerText = "Find Your Next Adventure";
                 if (homeSubtitle) homeSubtitle.innerText = "Type in a movie, TV show, book or video game you love, and we'll fetch recommendations with the exact same vibe.";
                 if (backBtnText) backBtnText.innerText = "New Search";
@@ -516,6 +669,30 @@
                 if (enSpan) enSpan.classList.remove('text-gold-500');
                 if (searchInput) searchInput.placeholder = "Örn: The Matrix, Dune, İskandinav Mitolojisi, Star Wars...";
                 if (btnText) btnText.innerText = "Ara";
+                
+                // Kategori Seçim Etiketleri
+                const catLabel = document.getElementById('category-select-label');
+                if (catLabel) catLabel.innerText = "Öneri Kategorileri";
+                const labelBook = document.getElementById('label-book');
+                if (labelBook) labelBook.innerText = "Kitap";
+                const labelMovie = document.getElementById('label-movie');
+                if (labelMovie) labelMovie.innerText = "Film";
+                const labelTv = document.getElementById('label-tv');
+                if (labelTv) labelTv.innerText = "Dizi";
+                const labelGame = document.getElementById('label-game');
+                if (labelGame) labelGame.innerText = "Oyun";
+
+                // Sonuç Filtreleme Etiketleri
+                const resFilterLabel = document.getElementById('results-filter-label');
+                if (resFilterLabel) resFilterLabel.innerText = "Filtrele:";
+                const resLabelBook = document.getElementById('res-label-book');
+                if (resLabelBook) resLabelBook.innerText = "Kitap";
+                const resLabelMovie = document.getElementById('res-label-movie');
+                if (resLabelMovie) resLabelMovie.innerText = "Film";
+                const resLabelTv = document.getElementById('res-label-tv');
+                if (resLabelTv) resLabelTv.innerText = "Dizi";
+                const resLabelGame = document.getElementById('res-label-game');
+                if (resLabelGame) resLabelGame.innerText = "Oyun";
                 
                 if (homeTitle) homeTitle.innerText = "Sıradaki Maceranı Bul";
                 if (homeSubtitle) homeSubtitle.innerText = "Sevdiğin bir filmi, diziyi veya oyunu yaz, sana aynı hissi veren içerikleri getirelim.";
@@ -588,12 +765,13 @@
         const CACHE_KEY = 'vibeVaultSearchCache';
         const MAX_CACHE_SIZE = 50;
 
-        function getCachedResults(query, isEnglish) {
+        function getCachedResults(query, isEnglish, categories) {
             try {
                 const cacheRaw = localStorage.getItem(CACHE_KEY);
                 if (!cacheRaw) return null;
                 const cache = JSON.parse(cacheRaw);
-                const cacheId = `${query.trim().toLowerCase()}-${isEnglish ? 'en' : 'tr'}`;
+                const sortedCats = [...(categories || [])].sort().join(',');
+                const cacheId = `${query.trim().toLowerCase()}-${sortedCats}-${isEnglish ? 'en' : 'tr'}`;
                 return cache[cacheId] || null;
             } catch (e) {
                 console.error('Cache read error:', e);
@@ -601,11 +779,12 @@
             return null;
         }
 
-        function setCachedResults(query, isEnglish, results) {
+        function setCachedResults(query, isEnglish, categories, results) {
             try {
                 const cacheRaw = localStorage.getItem(CACHE_KEY);
                 let cache = cacheRaw ? JSON.parse(cacheRaw) : {};
-                const cacheId = `${query.trim().toLowerCase()}-${isEnglish ? 'en' : 'tr'}`;
+                const sortedCats = [...(categories || [])].sort().join(',');
+                const cacheId = `${query.trim().toLowerCase()}-${sortedCats}-${isEnglish ? 'en' : 'tr'}`;
                 
                 cache[cacheId] = results;
                 
@@ -627,10 +806,17 @@
             if (!query) return;
 
             // Önbellek kontrolü (Quota tasarrufu sağlar)
-            const cachedBooks = getCachedResults(query, isEnglish);
+            const cachedBooks = getCachedResults(query, isEnglish, selectedCategories);
             if (cachedBooks) {
                 console.log('Serving from local cache:', query);
                 currentBooks = cachedBooks;
+                
+                // Sonuç filtresini arama esnasındaki kategorilerle eşle
+                activeResultsFilters = [...selectedCategories];
+                ['book', 'movie', 'tv', 'game'].forEach(cat => {
+                    updateChipStyles(`res-chip-${cat}`, activeResultsFilters.includes(cat));
+                });
+                
                 renderBooks(cachedBooks);
                 showResults(isEnglish ? `Recommendations for "${query}"` : `"${query}" için Öneriler`);
                 return;
@@ -675,8 +861,20 @@
                         searchBtn.disabled = false;
                         return;
                     }
+                    
+                    const backendCategories = [];
+                    if (selectedCategories.includes('book')) backendCategories.push('book');
+                    if (selectedCategories.includes('movie')) backendCategories.push('movie');
+                    if (selectedCategories.includes('tv')) backendCategories.push('tv');
+                    if (selectedCategories.includes('game')) {
+                        backendCategories.push('game');
+                        backendCategories.push('boardgame');
+                    }
+                    const allowedCatsStr = backendCategories.map(c => `'${c}'`).join(', ');
+
                     // System Prompt ve Yapılandırma
-                    const systemPrompt = `Sen edebi ve kültürel kürasyon yapan uzman bir stratejistsin. Kullanıcının verdiği filme, diziye, oyuna veya müziğe bakarak sadece "tür" olarak değil; "Ana Tema (Core Tropes)" ve "Üslup/Atmosfer (Vibe & Tone)" açısından benzer hisler uyandıran en az 5, en fazla 10 adet FARKLI MEDYA TÜRÜNDEN içerik önermelisin.
+                    const systemPrompt = `Sen edebi ve kültürel kürasyon yapan uzman bir stratejistsin. Kullanıcının verdiği filme, diziye, oyuna veya müziğe bakarak sadece "tür" olarak değil; "Ana Tema (Core Tropes)" ve "Üslup/Atmosfer (Vibe & Tone)" açısından benzer hisler uyandıran en az 5, en fazla 10 adet içerik önermelisin.
+                    Önereceğin eserlerin kategorileri kesinlikle sadece şunlar olmalıdır: [${allowedCatsStr}]. Başka kategoride hiçbir eser önerme.
                     Eğer doğrudan kullanıcının aradığı evrene (franchise) ait başka eserler varsa (örneğin Star Wars aramasına The Mandalorian dizisi veya Star Wars Jedi oyunları gibi), bunları da listeye alabilirsin. Ancak aynı evrenden/franchise'dan en fazla 2 öneri yapmalısın. Kalan öneriler tamamen farklı yapımlardan olmalıdır.
                     Dil tercihi: ${isEnglish ? 'İngilizce içerikler ve açıklamalar İngilizce olmalı.' : 'Türkçe açıklamalar olmalı.'}
                     Ayrıca her öneri için kullanıcının girdisiyle ne kadar güçlü bir vibe/tema eşleşmesi olduğunu 10 üzerinden sayısal (float) bir değer olarak puanlamalısın (Örn: 9.2).
@@ -749,7 +947,7 @@
                     const response = await fetchWithRetry(`/api/recommend`, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ query, isEnglish })
+                        body: JSON.stringify({ query, isEnglish, categories: selectedCategories })
                     });
 
                     if (!response.ok) {
@@ -764,9 +962,16 @@
                 books.sort((a, b) => b.matchScore - a.matchScore);
 
                 // Sonuçları önbelleğe kaydet
-                setCachedResults(query, isEnglish, books);
+                setCachedResults(query, isEnglish, selectedCategories, books);
 
                 currentBooks = books; 
+                
+                // Sonuç filtresini arama esnasındaki kategorilerle eşle
+                activeResultsFilters = [...selectedCategories];
+                ['book', 'movie', 'tv', 'game'].forEach(cat => {
+                    updateChipStyles(`res-chip-${cat}`, activeResultsFilters.includes(cat));
+                });
+
                 renderBooks(books);
                 showResults(isEnglish ? `Recommendations for "${query}"` : `"${query}" için Öneriler`);
 
@@ -844,6 +1049,7 @@
                 const card = document.createElement('div');
                 card.className = "bg-wood-800/80 border border-wood-700 rounded-xl p-6 relative flex flex-col transition-transform duration-300 hover:-translate-y-2 hover:shadow-[0_10px_30px_rgba(0,0,0,0.5)] group";
                 card.setAttribute('onclick', 'toggleQuote(this, event)');
+                card.setAttribute('data-category', book.category || 'book');
                 
                 card.innerHTML = `
                     <div class="absolute top-4 right-4 flex items-center gap-3">
