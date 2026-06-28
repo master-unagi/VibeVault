@@ -1185,7 +1185,7 @@
             try {
                 const query = `${title} ${author || ''} ${category || ''}`;
                 const langCode = isEnglish ? 'en' : 'tr';
-                const url = `https://${langCode}.wikipedia.org/w/api.php?action=query&format=json&generator=search&gsrsearch=${encodeURIComponent(query)}&gsrlimit=1&prop=pageimages&pithumbsize=500&origin=*`;
+                const url = `https://${langCode}.wikipedia.org/w/api.php?action=query&format=json&generator=search&gsrsearch=${encodeURIComponent(query)}&gsrlimit=1&prop=pageimages&pithumbsize=500&pilicense=any&origin=*`;
                 const response = await fetch(url);
                 if (!response.ok) return null;
                 const data = await response.json();
